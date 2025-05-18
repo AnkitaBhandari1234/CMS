@@ -1,7 +1,7 @@
 import React from 'react'
 import BinocularImage from '../assets/blogcontent1.webp'
 import TelescopeImage from '../assets/blogcontent2.webp'
-import GlossaryImage from '../assets/blogcontent3.webp'
+import GlossaryImage from '../assets/Blogcontent3.webp'
 import NightImage from '../assets/blogcontent4.webp'
 import CityImage from '../assets/blogcontent5.webp'
 
