@@ -1,5 +1,4 @@
-import React from 'react' 
-import Sociallife from '../assets/Sociallife.jpg'
+import Sociallife from '../assets/sociallife.jpg'
 import PoliticsPerson from '../assets/politics.jpg'
 import FoodImage from '../assets/food.jpg'
 
