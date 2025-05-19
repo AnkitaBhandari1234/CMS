@@ -54,7 +54,7 @@ function Blognewsletter() {
                       >
                         {({ setFieldValue, values }) => {
                           return (
-                            <Form className="flex flex-col gap-4 items-center h-[490px]   w-full  ">
+                            <Form className="flex flex-col gap-4 items-center h-[300px]   w-full  ">
                               {inputField.map((val, i) => {
                                 if (val.type == "file") {
                                   return (
