@@ -20,6 +20,7 @@ import BlogItem from './pages/BlogItem';
 import AboutService from './pages/AboutService';
 import Blogcard from './pages/Blogcard';
 import Blogcontent from './pages/Blogcontent';
+import Button from './pages/Button';
 
 
 function App() {
@@ -45,6 +46,7 @@ function App() {
           <Route path='/aboutservice' element={<AboutService/>}/>
           <Route path='/blogcard' element={<Blogcard/>}/>
           <Route path='/blogcontent' element={<Blogcontent/>}/>
+          <Route path='/button' element={<Button/>}/>
           
           </Route>
         </Routes>

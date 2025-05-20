@@ -109,6 +109,11 @@ function Navigation() {
       name:'Blog Content',
       icon:<MdContentPasteGo />,
     },
+    {
+      path:'/button ',
+      name:'Button',
+      icon:<MdContentPasteGo />,
+    },
     
   ]
   return (
