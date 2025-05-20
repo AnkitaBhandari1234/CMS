@@ -1,6 +1,7 @@
 import Sociallife from '../assets/sociallife.jpg'
 import PoliticsPerson from '../assets/politics.jpg'
 import FoodImage from '../assets/food.jpg'
+import EditDeleteButton from '../components/ui/EditDeleteButton';
 
 function Blogcard() {
            const categoryname = [
@@ -58,8 +59,7 @@ function Blogcard() {
                 <td className="border capitalize border-gray-800  w-3/12 px-2">{val.subtitle}</td>
                
                 <td className="border w-3/12">
-                  <button type="submit" className="cursor-pointer bg-gray-600 m-1 w-fit rounded text-white px-4 py-2    " >Edit</button>
-                  <button type="submit" className="cursor-pointer bg-red-600 m-1 w-fit rounded text-white px-4 py-2   "  >Delete</button>
+                  <EditDeleteButton/>
                   </td>
                 
               </tr>

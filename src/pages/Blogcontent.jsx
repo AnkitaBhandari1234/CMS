@@ -4,6 +4,7 @@ import TelescopeImage from '../assets/blogcontent2.webp'
 import GlossaryImage from '../assets/Blogcontent3.webp'
 import NightImage from '../assets/blogcontent4.webp'
 import CityImage from '../assets/blogcontent5.webp'
+import EditDeleteButton from '../components/ui/EditDeleteButton'
 
 
 function Blogcontent() {
@@ -82,8 +83,7 @@ function Blogcontent() {
                 <td className="border capitalize border-gray-800  w-5/12 px-2 text-sm">{val.description}</td>
                
                 <td className="border w-2/12">
-                  <button type="submit" className="cursor-pointer bg-gray-600 m-1 w-fit rounded text-white px-4 py-2    " >Edit</button>
-                  <button type="submit" className="cursor-pointer bg-red-600 m-1 w-fit rounded text-white px-4 py-2   "  >Delete</button>
+                  <EditDeleteButton/>
                   </td>
                 
               </tr>

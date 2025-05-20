@@ -2,6 +2,7 @@ import React from 'react'
 import CheeseSandwich from '../assets/sandwich.jpg'
 import BeefCutlet from '../assets/cutlet.jpg'
 import Meat from '../assets/meat.jpg'
+import EditDeleteButton from '../components/ui/EditDeleteButton';
 
 function AboutService() {
         const categoryname = [
@@ -58,8 +59,7 @@ function AboutService() {
                 <td className="border capitalize border-gray-800  w-4/12 px-2">{val.descrition}</td>
                
                 <td className="border w-2/12">
-                  <button type="submit" className="cursor-pointer bg-gray-600 m-1 w-fit rounded text-white px-4 py-2    " >Edit</button>
-                  <button type="submit" className="cursor-pointer bg-red-600 m-1 w-fit rounded text-white px-4 py-2   "  >Delete</button>
+                  <EditDeleteButton/>
                   </td>
                 
               </tr>

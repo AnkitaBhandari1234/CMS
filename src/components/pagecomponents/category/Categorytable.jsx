@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
+import EditDeleteButton from '../../ui/EditDeleteButton.jsx';
 
 
 function Categorytable() {
+  
      const categoryname = [
     {
       id: "1",
@@ -23,18 +25,8 @@ function Categorytable() {
       name: "buffet",
     },
   ];
+
   
-  const Delete=()=>{
-    alert("dsds")
-if(open){
-   
-   return  `<div className='w-10  h-12 absolute top-0 left-0 right-0 bottom-0 my-auto bg-gray-600'>
-   </div>`
-}
-else{
-    return null;
-}
-}
  
   return (
 
@@ -54,8 +46,7 @@ else{
                 <td className="">{val.id}</td>
                 <td className="border capitalize border-gray-800 ">{val.name}</td>
                 <td className="border w-5/12">
-                  <button type="submit" className="cursor-pointer bg-gray-600 m-1 w-fit rounded text-white px-4 py-2    " >Edit</button>
-                  <button type="submit" className="cursor-pointer bg-red-600 m-1 w-fit rounded text-white px-4 py-2   "  >Delete</button>
+                <EditDeleteButton/>
                   </td>
                 
               </tr>

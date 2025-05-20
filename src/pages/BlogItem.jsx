@@ -3,6 +3,7 @@ import FriedRice from '../assets/blogrice.jpg'
 import EggImage from '../assets/blogegg.jpg'
 import SteakImage from '../assets/blogsteak.jpg'
 import FlavouredBun from '../assets/blogbun.jpg'
+import EditDeleteButton from '../components/ui/EditDeleteButton'
 
 function BlogItem() {
           const categoryname = [
@@ -79,8 +80,7 @@ function BlogItem() {
                 <td className="border capitalize border-gray-800 p-8 ">{val.like}</td>
                 <td className="border capitalize border-gray-800  ">{val.comments}</td>
                 <td className="border w-2/12">
-                  <button type="submit" className="cursor-pointer bg-gray-600 m-1 w-fit rounded text-white px-4 py-2    " >Edit</button>
-                  <button type="submit" className="cursor-pointer bg-red-600 m-1 w-fit rounded text-white px-4 py-2   "  >Delete</button>
+                  <EditDeleteButton/>
                   </td>
                 
               </tr>

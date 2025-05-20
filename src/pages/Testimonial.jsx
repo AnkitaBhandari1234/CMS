@@ -1,6 +1,7 @@
 import React from 'react'
 import UserImage from '../assets/user.png.webp'
 import { MdOutlineStar } from "react-icons/md";
+import EditDeleteButton from '../components/ui/EditDeleteButton';
 
 
 function Testimonial() {
@@ -67,8 +68,7 @@ function Testimonial() {
                 <td className="border capitalize border-gray-800 ">{val.rating}</td>
                 <td className="border capitalize border-gray-800 w-5/12 text-[12px] px-2 ">{val.description}</td>
                 <td className="border w-2/12">
-                  <button type="submit" className="cursor-pointer bg-gray-600 m-1 w-fit rounded text-white px-4 py-2    " >Edit</button>
-                  <button type="submit" className="cursor-pointer bg-red-600 m-1 w-fit rounded text-white px-4 py-2   "  >Delete</button>
+                  <EditDeleteButton/>
                   </td>
                 
               </tr>
