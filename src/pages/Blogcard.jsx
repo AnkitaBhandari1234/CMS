@@ -2,8 +2,12 @@ import Sociallife from '../assets/sociallife.jpg'
 import PoliticsPerson from '../assets/politics.jpg'
 import FoodImage from '../assets/food.jpg'
 import EditDeleteButton from '../components/ui/EditDeleteButton';
+import { useState } from 'react';
+import EditBlogcard from '../components/pagecomponents/editBlogsection/EditBlogcard';
 
 function Blogcard() {
+  const [click,setclick]=useState(false);
+
            const categoryname = [
         {
           id: "1",
@@ -58,7 +62,16 @@ function Blogcard() {
                 <td className="border capitalize border-gray-800 w-2/12 ">{val.title}</td>
                 <td className="border capitalize border-gray-800  w-3/12 px-2">{val.subtitle}</td>
                
-                <td className="border w-3/12">
+                <td className=" w-full h-full  flex items-center justify-center">
+                       <button type="submit" className="cursor-pointer bg-gray-600 m-1 w-fit h-10 rounded text-white px-4 py-2   " onClick={()=>{
+                    setclick(true)
+                  }} >Edit</button>
+                  {
+                    click?<div className='fixed top-0 left-0 right-0 bottom-0 bg-[#9f9f9c]/20 flex items-center'>
+                      <EditBlogcard cancel={()=>{setclick(false)}}/>
+                    </div>:null
+                  }
+            
                   <EditDeleteButton/>
                   </td>
                 

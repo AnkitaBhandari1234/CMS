@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import EditDeleteButton from '../../ui/EditDeleteButton.jsx';
+import Editcategory from '../editcategory/Editcategory.jsx';
 
 
 function Categorytable() {
+  const [click,setclick]=useState(false)
   
      const categoryname = [
     {
@@ -45,8 +47,22 @@ function Categorytable() {
               <tr key={i} className="border border-gray-800">
                 <td className="">{val.id}</td>
                 <td className="border capitalize border-gray-800 ">{val.name}</td>
-                <td className="border w-5/12">
-                <EditDeleteButton/>
+                <td className=" w-full h-full flex items-center justify-center">
+                        <button type="submit" className="cursor-pointer bg-gray-600 m-1 w-fit h-10 rounded text-white px-4 py-2   " onClick={()=>{
+                    setclick(true)
+                  }} >Edit</button>
+                  {
+                   click?<div className='fixed top-0 left-0 right-0 bottom-0 bg-[#9f9f9c]/20 flex items-center'> 
+                  
+
+                   <Editcategory cancel={()=>{
+                    setclick(false)
+                   }}/>
+                   
+                   </div>:null
+                  }
+                 
+                  <EditDeleteButton/>
                   </td>
                 
               </tr>

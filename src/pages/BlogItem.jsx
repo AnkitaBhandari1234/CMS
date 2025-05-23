@@ -1,11 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import FriedRice from '../assets/blogrice.jpg'
 import EggImage from '../assets/blogegg.jpg'
 import SteakImage from '../assets/blogsteak.jpg'
 import FlavouredBun from '../assets/blogbun.jpg'
 import EditDeleteButton from '../components/ui/EditDeleteButton'
+import EditBlogItem from '../components/pagecomponents/editBlogsection/EditBlogItem'
 
 function BlogItem() {
+  const [click,setclick]=useState(false);
           const categoryname = [
     {
       id: "1",
@@ -79,7 +81,19 @@ function BlogItem() {
                 <td className="border capitalize border-gray-800  ">{val.descrition}</td>
                 <td className="border capitalize border-gray-800 p-8 ">{val.like}</td>
                 <td className="border capitalize border-gray-800  ">{val.comments}</td>
-                <td className="border w-2/12">
+                <td className=" w-full h-full flex items-center justify-center">
+                <button type='submit' className='cursor-pointer bg-gray-600 m-1 w-fit h-10 rounded text-white px-4 py-2' onClick={()=>{
+                  setclick(true)
+                }}>Edit</button>
+                  {
+                    click?<div className='fixed top-0 left-0 right-0 bottom-0 bg-[#9f9f9c]/30 flex items-center'>
+                      <EditBlogItem cancel={()=>{
+                        setclick(false)
+                      }}/>
+                    </div>:null
+                  }
+                  
+               
                   <EditDeleteButton/>
                   </td>
                 

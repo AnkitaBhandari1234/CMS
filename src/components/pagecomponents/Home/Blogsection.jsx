@@ -57,7 +57,7 @@ function Blogsection() {
                    
                  });
   return (
-   <div>
+   
               
                <div className="lg:grid lg:grid-cols-10  flex flex-col gap-4 mx-3 px-3  ">
                  <div className="lg:col-span-3 ">
@@ -156,7 +156,7 @@ function Blogsection() {
                    </div>
                  </div>
                </div>
-             </div>
+             
   )
 }
 

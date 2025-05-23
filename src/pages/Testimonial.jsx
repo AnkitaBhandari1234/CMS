@@ -1,10 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import UserImage from '../assets/user.png.webp'
 import { MdOutlineStar } from "react-icons/md";
 import EditDeleteButton from '../components/ui/EditDeleteButton';
+import EditReviewSection from '../components/pagecomponents/editReviewsection/EditReviewSection';
+
+
 
 
 function Testimonial() {
+  const [clicked,setClicked]=useState(false);
+ 
         const categoryname = [
     {
       id: "1",
@@ -67,11 +72,25 @@ function Testimonial() {
                 <td className="border capitalize border-gray-800 ">{val.name}</td>
                 <td className="border capitalize border-gray-800 ">{val.rating}</td>
                 <td className="border capitalize border-gray-800 w-5/12 text-[12px] px-2 ">{val.description}</td>
-                <td className="border w-2/12">
+                
+                <td className=" w-full h-full flex items-center justify-center">
+                        <button type="submit" className="cursor-pointer bg-gray-600 m-1 w-fit h-10 rounded text-white px-4 py-2   " onClick={()=>{
+                    setClicked(true)
+                  }} >Edit</button>
+                  {
+                   clicked?<div className='fixed top-0 left-0 right-0 bottom-0 bg-[#9f9f9c]/20 flex items-center'> 
+                  
+
+                   <EditReviewSection cancel={()=>{setClicked(false)}} />
+                   
+                   </div>:null
+                  }
+                 
                   <EditDeleteButton/>
                   </td>
                 
               </tr>
+              
             );
           })}
         </tbody>
