@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Formik, Form, ErrorMessage, Field } from "formik";
 import * as Yup from "yup";
 import Menuitemimage from "../../../assets/upload.svg";
+import toast, { Toaster } from "react-hot-toast";
 
 function Menulist() {
+  const [submit,setsubmit]=useState(false);
   // for input fileds used for mapping
   const inputField = [
     {
@@ -51,6 +53,7 @@ function Menulist() {
   });
   return (
     <div>
+      <Toaster/>
       <div>
         {/* Home page */}
         <div className="lg:grid lg:grid-cols-10 mx-3 flex-col gap-4 flex px-3  ">
@@ -68,9 +71,9 @@ function Menulist() {
                   description: "",
                   image: "",
                 }}
-                onSubmit={(values) => {
-                  console.log("Submit", values);
-                  alert("Order submitted successfully!");
+                onSubmit={() => {
+                setsubmit(true);
+                toast.success("Form submitted successfully!");
                 }}
                 validationSchema={Schema}
               >

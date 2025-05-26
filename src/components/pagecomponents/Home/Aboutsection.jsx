@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Formik,Form,ErrorMessage,Field } from 'formik';
 import Aboutsectionimage from '../../../assets/upload.svg'
 import * as Yup from "yup"
+import toast, { Toaster } from 'react-hot-toast';
 
 function Aboutsection() {
+  const [submit,setsubmit]=useState(false);
     const inputField=[
       {title:'image',
           type:'file',
@@ -16,10 +18,7 @@ function Aboutsection() {
         },
     ]
     const Schema = Yup.object().shape({
-       subtitle: Yup.string()
-         .min(3, "Too Short")
-         .max(6, "Too Long")
-         .required("Required"),
+       
         
        title: Yup.string()
          .min(2, "Too short")
@@ -36,7 +35,8 @@ function Aboutsection() {
    
   return (
     
-          <div  className="lg:grid lg:grid-cols-10   flex flex-col gap-4  mx-3 px-3   ">
+    <div  className="lg:grid lg:grid-cols-10   flex flex-col gap-4  mx-3 px-3   ">
+            <Toaster/>
                 <div className="lg:col-span-3">
                   <h1 className='text-2xl  font-medium text-black'>About Section</h1>
                   <h2>[title,description,image]</h2>
@@ -46,12 +46,14 @@ function Aboutsection() {
                   <Formik
                   initialValues={{
                   
+                    image: "",
                     title: "",
                     description: "",
-                    image: "",
                   }}
-                  onSubmit={(values) => {
-                    console.log("Submit", values);
+                  onSubmit={() => {
+                   setsubmit(true);
+            toast.success("Form submitted successfully!");
+           
                   }}
                   validationSchema={Schema}
                 >

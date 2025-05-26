@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Formik,Form,ErrorMessage,Field } from 'formik';
 import * as Yup from 'yup';
 import Image from '../../../assets/upload.svg'
+import toast, { Toaster } from 'react-hot-toast';
 
 function Foodgallerysection() {
+  const [submit,setsubmit]=useState(false);
     const inputField=[
         {
             title:"title",
@@ -44,6 +46,7 @@ function Foodgallerysection() {
       <div>
              
                 <div className="lg:grid lg:grid-cols-10  flex flex-col gap-4  mx-3 px-3  ">
+                  <Toaster/>
                   <div className="col-span-3 ">
                     <h1 className=" text-2xl  font-medium  ">Food Gallery</h1>
                     <h2>[title,sub-title,category,image]</h2>
@@ -59,8 +62,8 @@ function Foodgallerysection() {
                           image: "",
                         }}
                         onSubmit={(values) => {
-                          console.log("Submit", values);
-                          alert("Order submitted successfully!");
+                          setsubmit(true);
+                          toast.success('Form submitted successfully!')
                         }}
                         validationSchema={Schema}
                       >

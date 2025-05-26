@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Formik,Form,ErrorMessage,Field } from 'formik';
 import * as Yup from 'yup'
 import Image from '../../../assets/upload.svg'
+import toast, { Toaster } from 'react-hot-toast';
 
 function Reservationsection() {
+  const [submit,setsubmit]=useState(false)
     const inputField=[
         {
             title:"title",
@@ -20,10 +22,7 @@ function Reservationsection() {
         
     ]
         const Schema = Yup.object().shape({
-           subtitle: Yup.string()
-             .min(3, "Too Short")
-             .max(6, "Too Long")
-             .required("Required"),
+          
             
            title: Yup.string()
              .min(2, "Too short")
@@ -42,6 +41,7 @@ function Reservationsection() {
    
           <div>
             {/* Home page */}
+              <Toaster/>
             <div className="lg:grid lg:grid-cols-10    mx-3 flex flex-col gap-4 px-3  ">
               <div className="lg:col-span-3 ">
                 <h1 className=" text-2xl  font-medium  ">Reservation</h1>
@@ -52,14 +52,15 @@ function Reservationsection() {
                 <div className=" ">
                   <Formik
                     initialValues={{
-                      itemname: "",
+                     
                       title: "",
                       description: "",
                       image: "",
                     }}
                     onSubmit={(values) => {
-                      console.log("Submit", values);
-                      alert("Order submitted successfully!");
+                      setsubmit(true);
+                      toast.success('Form submitted successfully!')
+                      console.log(values)
                     }}
                     validationSchema={Schema}
                   >

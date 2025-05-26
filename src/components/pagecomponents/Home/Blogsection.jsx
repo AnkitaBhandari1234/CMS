@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Formik,Form,ErrorMessage,Field } from 'formik';
 import * as Yup from 'yup'
 import Image from '../../../assets/upload.svg'
+import toast, { Toaster } from 'react-hot-toast';
 
 function Blogsection() {
+  const[submit,setsubmit]=useState(false)
      const inputField=[
             {
                 title:"title",
@@ -41,14 +43,10 @@ function Blogsection() {
                 },
             ]
                 const Schema = Yup.object().shape({
-                   name: Yup.string()
-                     
-                     .required("Required"),
-                    
-                   rating: Yup.string()
+                 
                      
                      
-                     .required("Required"),
+                     
                    description: Yup.string()
                      .min(10, "Too short")
                      .max(20, "Too long")
@@ -60,6 +58,7 @@ function Blogsection() {
    
               
                <div className="lg:grid lg:grid-cols-10  flex flex-col gap-4 mx-3 px-3  ">
+                <Toaster/>
                  <div className="lg:col-span-3 ">
                    <h1 className=" text-2xl  font-medium  ">Blog</h1>
                    <h2 className=''>[title,sub-title,image,date,foodname,
@@ -70,14 +69,18 @@ function Blogsection() {
                    <div className=" ">
                      <Formik
                        initialValues={{
-                         itemname: "",
                          title: "",
-                         description: "",
+                         subtitle:"",
                          image: "",
+                         date:"",
+                         foodname:"",
+                         description: "",
+                        like:"",
+                        comments:"",
                        }}
-                       onSubmit={(values) => {
-                         console.log("Submit", values);
-                         alert("Order submitted successfully!");
+                       onSubmit={() => {
+                         setsubmit(true)
+                         toast.success('Form submitted successfully!')
                        }}
                        validationSchema={Schema}
                      >

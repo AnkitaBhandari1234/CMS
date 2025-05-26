@@ -1,9 +1,11 @@
 import { Formik, ErrorMessage, Field, Form } from "formik";
 import * as Yup from "yup";
-import React from "react";
+import React, { useState } from "react";
 import Homepageimage from "../../../assets/upload.svg";
+import toast, { Toaster } from "react-hot-toast";
 
 function Herosection() {
+  const [submit,setsubmit]=useState(false);
     // for input fileds used for mapping
   const inputField = [
     {
@@ -45,6 +47,8 @@ function Herosection() {
 
   return (
   <div >
+            <Toaster/>
+
     {/* Home page */}
     <div className="lg:grid lg:grid-cols-10  mx-3 flex flex-col gap-4 px-3    ">
       <div className="lg:col-span-3 ">
@@ -62,12 +66,17 @@ function Herosection() {
             description: "",
             image: "",
           }}
-          onSubmit={(values) => {
-            console.log("Submit", values);
-            alert("Order submitted successfully!");
+          onSubmit={() => {
+            setsubmit(true)
+            toast.success("Form submitted successfully!")
+            
+           
+           
           }}
           validationSchema={Schema}
         >
+         
+          
           {({ setFieldValue, values }) => {
             return (
               <Form className="flex flex-col lg:gap-4 gap-3 items-center h-[550px]  w-full  ">
@@ -122,9 +131,11 @@ function Herosection() {
                 <div className="w-full  ">
                     <button type="submit"className=" lg:w-3/12 w-5/12 mx-auto p-2  bg-gray-300 uppercase text-lg font-medium rounded cursor-pointer hover:text-white hover:bg-gray-600 transition mx-auto">Submit</button>
                     </div>
+                   
               </Form>
             );
           }}
+        
         </Formik>
       </div>
     </div>

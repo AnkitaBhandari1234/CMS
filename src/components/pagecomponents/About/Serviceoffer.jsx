@@ -1,14 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Formik,Form,ErrorMessage,Field } from 'formik';
 import Image from '../../../assets/upload.svg'
 import * as Yup from "yup"
+import toast, { Toaster } from 'react-hot-toast';
 
 function Serviceoffer() {
+  const [submit,setsubmit]=useState(false)
      const inputField=[
             {title:'title',
                 type:'text',
             },
-            {title:'sub-title',
+            {title:'subtitle',
                 type:'text',
             },
             {title:'image',
@@ -41,6 +43,7 @@ function Serviceoffer() {
          });
   return (
     <div>
+      <Toaster/>
                      
                        <div className="lg:grid lg:grid-cols-10 flex flex-col gap-4 mx-3 px-3  ">
                          <div className="col-span-3 ">
@@ -52,14 +55,16 @@ function Serviceoffer() {
                            <div className=" ">
                              <Formik
                                initialValues={{
-                                 itemname: "",
+                                
                                  title: "",
-                                 description: "",
+                                 subtitle:"",
                                  image: "",
+                                 foodname:"",
+                                 description: "",
                                }}
                                onSubmit={(values) => {
-                                 console.log("Submit", values);
-                                 alert("Order submitted successfully!");
+                                 setsubmit(true)
+                                 toast.success('Form submitted successfully!')
                                }}
                                validationSchema={Schema}
                              >
