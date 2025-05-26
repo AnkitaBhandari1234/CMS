@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { Formik,Form,ErrorMessage,Field } from 'formik';
 import * as Yup from 'yup';
 import Image from '../../../assets/upload.svg'
+import toast, { Toaster } from 'react-hot-toast';
 
 function BlogLeftcontent() {
+  const [submit,setsubmit]=useState(false);
     const inputField=[
              
                 {title:'title',
@@ -25,25 +27,22 @@ function BlogLeftcontent() {
                
             ]
             const Schema = Yup.object().shape({
-               subtitle: Yup.string()
+               title: Yup.string()
                  .min(3, "Too Short")
                  .max(6, "Too Long")
                  .required("Required"),
                 
-               title: Yup.string()
+               name: Yup.string()
                  .min(2, "Too short")
                  .max(5, "Too long")
                  
                  .required("Required"),
-               description: Yup.string()
-                 .min(10, "Too short")
-                 .max(20, "Too long")
-                 .lowercase("Lowercase")
-                 .required("Required"),
+           
                
              });
   return (
    <div  className="lg:grid lg:grid-cols-10   flex flex-col gap-4  mx-3 px-3   ">
+    <Toaster/>
                      <div className="lg:col-span-3">
                        <h1 className='text-2xl  font-medium text-black'>Blog Left Content</h1>
                        <h2>[title,name,date,views,comments]</h2>
@@ -62,7 +61,9 @@ function BlogLeftcontent() {
                        
                        }}
                        onSubmit={(values) => {
-                         console.log("Submit", values);
+                         setsubmit(true);
+                         toast.success("Form submitted successfully!");
+
                        }}
                        validationSchema={Schema}
                      >

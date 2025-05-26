@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Formik,Form,ErrorMessage,Field } from 'formik';
 import * as Yup from 'yup';
 import Image from '../../../assets/upload.svg'
+import toast, { Toaster } from 'react-hot-toast';
 
 
 function Blogprofile() {
+  const [submit,setsubmit]=useState(false);
      const inputField=[
              {title:'image',
                  type:'file',
@@ -12,7 +14,7 @@ function Blogprofile() {
                 {title:'name',
                     type:'text',
                 },
-                {title:'sub-title',
+                {title:'subtitle',
                     type:'text',
                 },
                 {title:'facebook',
@@ -37,7 +39,7 @@ function Blogprofile() {
                  .max(6, "Too Long")
                  .required("Required"),
                 
-               title: Yup.string()
+               name: Yup.string()
                  .min(2, "Too short")
                  .max(5, "Too long")
                  
@@ -51,6 +53,7 @@ function Blogprofile() {
              });
   return (
    <div  className="lg:grid lg:grid-cols-10 lg:gap-7 flex flex-col gap-4  mx-3 px-3   ">
+    <Toaster/>
                      <div className="lg:col-span-3 ">
                        <h1 className='text-2xl  font-medium text-black'>Blog Profile</h1>
                        <h2 className='break-all'>[image,name,sub-title,facebook,twitter,github,behance,description]</h2>
@@ -69,7 +72,8 @@ function Blogprofile() {
                          description: "",
                        }}
                        onSubmit={(values) => {
-                         console.log("Submit", values);
+                        setsubmit(true);
+                        toast.success('Form submitted successfully!')
                        }}
                        validationSchema={Schema}
                      >
@@ -112,7 +116,7 @@ function Blogprofile() {
                                        id={val.title}
                                        placeholder={val.title}
                                        name={val.title}
-                                       className=" capitalize border-1 border-black  p-1.5 lg:w-10/12 w-full rounded placeholder:text-gray-600 outline-none my-2 placeholder:px-1.5  "/>
+                                       className="  border-1 border-black  p-1.5 lg:w-10/12 w-full rounded placeholder:text-gray-600 outline-none my-2 placeholder:px-1.5  "/>
                                     
                                        <ErrorMessage
                                          name={val.title}

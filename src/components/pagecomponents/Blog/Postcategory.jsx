@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Formik,Form,ErrorMessage,Field } from 'formik';
 import * as Yup from 'yup';
 import Image from '../../../assets/upload.svg'
+import toast, { Toaster } from 'react-hot-toast';
 
 function Postcategory() {
+  const [submit,setsubmit]=useState(false)
        const inputField=[
            
                 {title:'title',
@@ -12,25 +14,18 @@ function Postcategory() {
                
             ]
             const Schema = Yup.object().shape({
-               subtitle: Yup.string()
-                 .min(3, "Too Short")
-                 .max(6, "Too Long")
-                 .required("Required"),
+            
                 
                title: Yup.string()
                  .min(2, "Too short")
                  .max(5, "Too long")
                  
                  .required("Required"),
-               description: Yup.string()
-                 .min(10, "Too short")
-                 .max(20, "Too long")
-                 .lowercase("Lowercase")
-                 .required("Required"),
                
              });
   return (
    <div  className="lg:grid lg:grid-cols-10 lg:gap-7 flex flex-col gap-4  mx-3 px-3   ">
+    <Toaster/>
                        <div className="lg:col-span-3 ">
                          <h1 className='text-2xl  font-medium text-black'>Post Categories</h1>
                          <h2 className='break-all'>[title]</h2>
@@ -45,7 +40,8 @@ function Postcategory() {
 
                          }}
                          onSubmit={(values) => {
-                           console.log("Submit", values);
+                          setsubmit(true);
+                          toast.success('Form submitted successfully!');
                          }}
                          validationSchema={Schema}
                        >
