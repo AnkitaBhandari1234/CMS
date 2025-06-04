@@ -3,6 +3,7 @@ import { Formik, Form, ErrorMessage, Field } from "formik";
 
 import Image from "../../../assets/upload.svg";
 
+
 function Editabout({cancel}) {
     const inputField=[
         { 
