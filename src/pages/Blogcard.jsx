@@ -1,45 +1,33 @@
-import Sociallife from '../assets/sociallife.jpg'
-import PoliticsPerson from '../assets/politics.jpg'
-import FoodImage from '../assets/food.jpg'
+// import Sociallife from '../assets/sociallife.jpg'
+// import PoliticsPerson from '../assets/politics.jpg'
+// import FoodImage from '../assets/food.jpg'
 import EditDeleteButton from '../components/ui/EditDeleteButton';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import EditBlogcard from '../components/pagecomponents/editBlogsection/EditBlogcard';
+import axios from 'axios';
 
 function Blogcard() {
   const [click,setclick]=useState(false);
 
-           const categoryname = [
-        {
-          id: "1",
-          image:<img src={Sociallife} className='w-28 mx-auto'></img>,
-          title:'Social Life',
-          subtitle:'Enjoy your social life together',
-         
-         
-          
-        },
-        {
-          id: "2",
-          image:<img src={PoliticsPerson} className='w-28 mx-auto'></img>,
-          title:'Politics',
-          subtitle:'Be a part of politics',
-         
-         
-          
-        },
-        {
-          id: "3",
-          image:<img src={FoodImage} className='w-28 mx-auto'></img>,
-          title:'Food',
-          subtitle:'Let the food be finished',
-
-         
-         
-          
-        },
-       
-       
-      ];
+       const [datas, setdatas] = useState([]);
+  const getdatas = () => {
+    try {
+      axios
+        .get("http://localhost:3000/blogcard")
+        .then((result) => {
+          console.log(result.data);
+          setdatas([...result.data]);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    getdatas();
+  }, []);
   return (
     <div className=''>
       <table  className=" border-gray-800 w-11/12 text-center mx-auto my-4 h-[500px]">
@@ -54,13 +42,13 @@ function Blogcard() {
           </tr>
         </thead>
         <tbody className="border">
-          {categoryname.map((val, i) => {
+          {datas.map((val, i) => {
             return (
               <tr key={i} className="border border-gray-800">
                 <td className="">{val.id}</td>
                 <td className="border capitalize border-gray-800  w-3/12">{val.image}</td>
-                <td className="border capitalize border-gray-800 w-2/12 ">{val.title}</td>
-                <td className="border capitalize border-gray-800  w-3/12 px-2">{val.subtitle}</td>
+                <td className="border capitalize border-gray-800 w-2/12 ">{val.name}</td>
+                <td className="border capitalize border-gray-800  w-3/12 px-2">{val.description}</td>
                
                 <td className=" w-full h-full  flex items-center justify-center">
                        <button type="submit" className="cursor-pointer bg-gray-600 m-1 w-fit h-10 rounded text-white px-4 py-2   " onClick={()=>{

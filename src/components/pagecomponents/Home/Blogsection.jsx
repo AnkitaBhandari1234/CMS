@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Formik, Form, Field } from "formik";
 
-import Image from "../../../assets/upload.svg";
+
 import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
 

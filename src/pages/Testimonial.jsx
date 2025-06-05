@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
-import UserImage from '../assets/user.png.webp'
-import { MdOutlineStar } from "react-icons/md";
+import React, { useEffect, useState } from 'react'
+// import UserImage from '../assets/user.png.webp'
+// import { MdOutlineStar } from "react-icons/md";
 import EditDeleteButton from '../components/ui/EditDeleteButton';
 import EditReviewSection from '../components/pagecomponents/editReviewsection/EditReviewSection';
+import axios from 'axios';
 
 
 
@@ -10,45 +11,26 @@ import EditReviewSection from '../components/pagecomponents/editReviewsection/Ed
 function Testimonial() {
   const [clicked,setClicked]=useState(false);
  
-        const categoryname = [
-    {
-      id: "1",
-      image: <img src={UserImage} className='w-15 mx-auto'></img>,
-      rating: <MdOutlineStar className='text-2xl text-orange-500'  />  ,
-      name:"Hulda Sutton",
-      description:"Accessories Here you can find the best computer accessory for your laptop, monitor, printer, scanner, speaker. Here you can find the best computer accessory for your laptop, monitor, printer, scanner, speaker",
-     
-      
-    },
-    {
-      id: "2",
-      image: <img src={UserImage} className='w-15 mx-auto'></img>,
-      rating: <MdOutlineStar className='text-2xl text-orange-500'  />  ,
-      name:"Hulda Sutton",
-      description:"Accessories Here you can find the best computer accessory for your laptop, monitor, printer, scanner, speaker. Here you can find the best computer accessory for your laptop, monitor, printer, scanner, speaker",
-     
-      
-    },
-    {
-      id: "3",
-      image: <img src={UserImage} className='w-15 mx-auto'></img>,
-      rating: <MdOutlineStar className='text-2xl text-orange-500'  />  ,
-      name:"Hulda Sutton",
-      description:"Accessories Here you can find the best computer accessory for your laptop, monitor, printer, scanner, speaker. Here you can find the best computer accessory for your laptop, monitor, printer, scanner, speaker",
-     
-      
-    },
-    {
-      id: "4",
-      image: <img src={UserImage} className='w-15 mx-auto'></img>,
-      rating: <MdOutlineStar className='text-2xl text-orange-500'  />  ,
-      name:"Hulda Sutton",
-      description:"Accessories Here you can find the best computer accessory for your laptop, monitor, printer, scanner, speaker. Here you can find the best computer accessory for your laptop, monitor, printer, scanner, speaker",
-     
-      
-    },
    
-  ];
+              const [datas, setdatas] = useState([]);
+  const getdatas = () => {
+    try {
+      axios
+        .get("http://localhost:3000/testimonial")
+        .then((result) => {
+          console.log(result.data);
+          setdatas([...result.data]);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    getdatas();
+  }, []);
   
   return (
      <div className='h-lvh'>
@@ -64,7 +46,7 @@ function Testimonial() {
           </tr>
         </thead>
         <tbody className="border">
-          {categoryname.map((val, i) => {
+          {datas.map((val, i) => {
             return (
               <tr key={i} className="border border-gray-800">
                 <td className="">{val.id}</td>
