@@ -28,6 +28,25 @@ function Blogcard() {
   useEffect(() => {
     getdatas();
   }, []);
+
+  const [deleteclick, setdeleteclick] = useState(null);
+  const deletedatas = (id) => {
+    console.log(id);
+    try {
+      axios
+        .delete(`http://localhost:3000/blogcard/${id}` )
+        .then((result) => {
+          console.log(result.data);
+          setdeleteclick(false);
+          getdatas();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div className=''>
       <table  className=" border-gray-800 w-11/12 text-center mx-auto my-4 h-[500px]">
@@ -60,7 +79,9 @@ function Blogcard() {
                     </div>:null
                   }
             
-                  <EditDeleteButton/>
+                  <EditDeleteButton
+                  deleteChange={()=>{deletedatas(val.id)}}
+                  click={deleteclick} setdeleteclick={()=>setdeleteclick(!deleteclick)}/>
                   </td>
                 
               </tr>

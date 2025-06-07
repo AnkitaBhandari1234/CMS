@@ -29,6 +29,25 @@ function BlogItem() {
   }, []);
 
   const [click, setclick] = useState(false);
+  const [deleteclick, setdeleteclick] = useState(null);
+
+  const deletedatas = (id) => {
+    console.log(id);
+    try {
+      axios
+        .delete(`http://localhost:3000/banners/${id}`)
+        .then((result) => {
+          console.log(result.data);
+          setdeleteclick(false);
+          getdatas();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className="">
@@ -49,7 +68,7 @@ function BlogItem() {
           {datas.map((val, i) => {
             return (
               <tr key={i} className="border border-gray-800 ">
-                <td className="p-6">{i+1}</td>
+                <td className="p-6">{i + 1}</td>
                 <td className="border capitalize border-gray-800  px-1 ">
                   {val.image}
                 </td>
@@ -88,7 +107,13 @@ function BlogItem() {
                     </div>
                   ) : null}
 
-                  <EditDeleteButton />
+                  <EditDeleteButton
+                    deleteChange={() => {
+                      deletedatas(val.id);
+                    }}
+                    click={deleteclick}
+                    setdeleteclick={() => setdeleteclick(!deleteclick)}
+                  />
                 </td>
               </tr>
             );

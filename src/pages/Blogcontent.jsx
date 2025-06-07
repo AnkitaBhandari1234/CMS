@@ -11,6 +11,8 @@ import axios from 'axios'
 
 function Blogcontent() {
   const [click,setclick]=useState(false);
+ 
+    const[deleteclick,setdeleteclick]=useState(null);
               const [datas, setdatas] = useState([]);
   const getdatas = () => {
     try {
@@ -30,6 +32,24 @@ function Blogcontent() {
   useEffect(() => {
     getdatas();
   }, []);
+
+  const deletedatas = (id) => {
+    try {
+      axios
+        .delete(`http://localhost:3000/blogcontent/${id}`)
+        .then((result) => {
+          console.log(result.data);
+          setdeleteclick(false);
+          getdatas();
+          
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
    <div className=''>
       <table  className=" border-gray-800 w-full text-center  my-4 h-[500px] mx-2">
@@ -65,7 +85,11 @@ function Blogcontent() {
                   }
                   
                
-                  <EditDeleteButton/>
+                  <EditDeleteButton deleteChange={()=>{
+                    deletedatas(val.id)
+
+                  }}
+                  click={deleteclick} setdeleteclick={()=>setdeleteclick(!deleteclick)}/>
                   </td>
                 
               </tr>
