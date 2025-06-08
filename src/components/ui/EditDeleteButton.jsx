@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
+import View from '../pagecomponents/View/View'
+import { Link } from 'react-router-dom'
 
 function EditDeleteButton({deleteChange,setdeleteclick,click}) {
   return (
-    <div>
+    <div className='flex '>
 
         {/* edit button */}
         
@@ -22,6 +24,12 @@ function EditDeleteButton({deleteChange,setdeleteclick,click}) {
                       </div>
                     </div>:null
                   }
+                 <Link to='/view'>
+                    <button type='submit' className='bg-gray-700 text-white rounded w-fit px-4 py-2 m-1 cursor-pointer' >
+                      View
+                      </button>
+                      </Link>
+                 
                   
     </div>
   )

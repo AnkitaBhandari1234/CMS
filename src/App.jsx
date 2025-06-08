@@ -13,7 +13,7 @@ import Gallery from './pages/Gallery';
 import Menu from './pages/Menu';
 import Blog from './pages/Blog';
 import Page from './pages/Page';
-import Category from './pages/Category';
+
 import Menuitem from './pages/Menuitem';
 import Testimonial from './pages/Testimonial';
 import BlogItem from './pages/BlogItem';
@@ -21,6 +21,7 @@ import AboutService from './pages/AboutService';
 import Blogcard from './pages/Blogcard';
 import Blogcontent from './pages/Blogcontent';
 import Button from './pages/Button';
+import View from './components/pagecomponents/View/View';
 
 
 function App() {
@@ -39,7 +40,7 @@ function App() {
           <Route path='/page' element={<Page></Page>}/>
           <Route path='/contact' element={<Contact></Contact>}/>
           <Route path='/login' element={<Login></Login>}/>
-          <Route path='/category' element={<Category></Category>}/>
+          
           <Route path='/menuitem' element={<Menuitem></Menuitem>}/>
           <Route path='/testimonial' element={<Testimonial/>}/>
           <Route path='/blogitem' element={<BlogItem/>}/>
@@ -47,7 +48,7 @@ function App() {
           <Route path='/blogcard' element={<Blogcard/>}/>
           <Route path='/blogcontent' element={<Blogcontent/>}/>
           <Route path='/button' element={<Button/>}/>
-          
+          <Route path='/view' element={<View/>}/>
           
           
           </Route>

@@ -74,11 +74,7 @@ function Navigation() {
       name:'log In',
       icon:<RiLoginBoxFill />,
     },
-    {
-      path:'/category ',
-      name:'category',
-      icon:<BiSolidCategory />,
-    },
+   
     {
       path:'/menuitem ',
       name:'menuitem',

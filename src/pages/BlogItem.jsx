@@ -72,7 +72,7 @@ function BlogItem() {
                 <td className="border capitalize border-gray-800  px-1 ">
                   {val.image}
                 </td>
-                <td className="border capitalize border-gray-800 w-1/12">
+                <td className="border capitalize border-gray-800 ">
                   {val.title}
                 </td>
                 <td className="border capitalize border-gray-800  ">
@@ -87,7 +87,7 @@ function BlogItem() {
                 <td className="border capitalize border-gray-800  ">
                   {val.comments}
                 </td>
-                <td className=" w-full h-full flex items-center justify-center">
+                <td className=" w-[150px] h-full flex items-center justify-center mx-auto">
                   <button
                     type="submit"
                     className="cursor-pointer bg-gray-600 m-1 w-fit h-10 rounded text-white px-4 py-2"

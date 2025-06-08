@@ -1,47 +1,51 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import EditDeleteButton from '../components/ui/EditDeleteButton';
 import EditMenuSection from '../components/pagecomponents/editmenusection/EditMenuSection';
+import axios from 'axios';
 
 function Menuitem() {
   const [click,setclick]=useState(false)
-      const categoryname = [
-    {
-      id: "1",
-      name: "Cappuccion",
-      descrition:"Usage of the Internet is becoming more common due to rapid advance.",
-      price:'$49',
-     
-      
-    },
-    {
-      id: "2",
-      name: "Americano",
-       descrition:"Usage of the Internet is becoming more common due to rapid advance.",
-      price:'$49',
+    const [datas, setdatas] = useState([]);
+  const getdatas = () => {
+    try {
+      axios
+        .get("http://localhost:3000/category")
+        .then((result) => {
+          console.log(result.data);
+          setdatas([...result.data]);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    getdatas();
+  }, []);
 
-    },
-    { id: "3",
-       name: "Macchiato",
-        descrition:"Usage of the Internet is becoming more common due to rapid advance.",
-      price:'$49',
-       },
-    { id: "4",
-       name: "Piccolo Latte",
-        descrition:"Usage of the Internet is becoming more common due to rapid advance.",
-      price:'$49',
-       },
-    { id: "5",
-       name: "Mocha",
-        descrition:"Usage of the Internet is becoming more common due to rapid advance.",
-      price:'$49',
-       },
-    { id: "6",
-       name: "Ristretto",
-        descrition:"Usage of the Internet is becoming more common due to rapid advance.",
-      price:'$49',
-       },
-   
-  ];
+  
+  const [deleteclick, setdeleteclick] = useState(null);
+
+  const deletedatas = (id) => {
+    console.log(id);
+    try {
+      axios
+        .delete(`http://localhost:3000/category/${id}`)
+        .then((result) => {
+          console.log(result.data);
+          setdeleteclick(false);
+          getdatas();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+ 
   
   return (
    <div className=''>
@@ -56,12 +60,12 @@ function Menuitem() {
           </tr>
         </thead>
         <tbody className="border">
-          {categoryname.map((val, i) => {
+          {datas.map((val, i) => {
             return (
               <tr key={i} className="border border-gray-800">
                 <td className="">{val.id}</td>
                 <td className="border capitalize border-gray-800 ">{val.name}</td>
-                <td className="border capitalize border-gray-800  w-4/12">{val.descrition}</td>
+                <td className="border capitalize border-gray-800  w-4/12">{val.description}</td>
                 <td className="border capitalize border-gray-800 ">{val.price}</td>
                   <td className=" w-full h-full flex items-center justify-center">
                 <button type='submit' className='cursor-pointer bg-gray-600 m-1 w-fit h-10 rounded text-white px-4 py-2' onClick={()=>{
@@ -76,7 +80,11 @@ function Menuitem() {
                   }
                   
                
-                  <EditDeleteButton/>
+                  <EditDeleteButton   deleteChange={() => {
+                      deletedatas(val.id)
+                    }}
+                    click={deleteclick}
+                    setdeleteclick={() => setdeleteclick(!deleteclick)}/>
                   </td>
                 
               </tr>

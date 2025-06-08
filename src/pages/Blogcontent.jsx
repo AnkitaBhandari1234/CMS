@@ -70,9 +70,9 @@ function Blogcontent() {
                 <td className="">{val.id}</td>
                 <td className="border capitalize border-gray-800  w-2/12">{val.image}</td>
                 <td className="border capitalize border-gray-800 w-2/12 ">{val.title}</td>
-                <td className="border capitalize border-gray-800  w-5/12 px-2 text-sm">{val.description}</td>
+                <td className="border capitalize border-gray-800  w-4/12 px-2 text-sm">{val.description}</td>
                
-                 <td className=" w-full h-full flex items-center justify-center">
+                 <td className=" w-full h-full flex items-center justify-center ">
                 <button type='submit' className='cursor-pointer bg-gray-600 m-1 w-fit h-10 rounded text-white px-4 py-2' onClick={()=>{
                   setclick(true)
                 }}>Edit</button>
