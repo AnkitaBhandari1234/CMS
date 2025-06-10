@@ -48,7 +48,7 @@ function App() {
           <Route path='/blogcard' element={<Blogcard/>}/>
           <Route path='/blogcontent' element={<Blogcontent/>}/>
           <Route path='/button' element={<Button/>}/>
-          <Route path='/view' element={<View/>}/>
+          <Route path='/view/:id' element={<View/>}/>
           
           
           </Route>

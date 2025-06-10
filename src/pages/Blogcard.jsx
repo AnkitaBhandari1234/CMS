@@ -5,6 +5,7 @@ import EditDeleteButton from '../components/ui/EditDeleteButton';
 import { useEffect, useState } from 'react';
 import EditBlogcard from '../components/pagecomponents/editBlogsection/EditBlogcard';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 function Blogcard() {
   const [click,setclick]=useState(false);
@@ -70,6 +71,11 @@ function Blogcard() {
                 <td className="border capitalize border-gray-800  w-3/12 px-2">{val.description}</td>
                
                 <td className=" w-full h-full  flex items-center justify-center">
+                   <Link to={`/view/${val.id}?id=${val.id} `} state={{id:val.id}}>
+                                      <button type='submit' className='bg-gray-700 text-white rounded w-fit px-4 py-2 m-1 cursor-pointer' >
+                                        View
+                                        </button>
+                                        </Link>
                        <button type="submit" className="cursor-pointer bg-gray-600 m-1 w-fit h-10 rounded text-white px-4 py-2   " onClick={()=>{
                     setclick(true)
                   }} >Edit</button>

@@ -6,6 +6,7 @@ import FlavouredBun from "../assets/blogbun.jpg";
 import EditDeleteButton from "../components/ui/EditDeleteButton";
 import EditBlogItem from "../components/pagecomponents/editBlogsection/EditBlogItem";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 function BlogItem() {
   const [datas, setdatas] = useState([]);
@@ -88,6 +89,11 @@ function BlogItem() {
                   {val.comments}
                 </td>
                 <td className=" w-[150px] h-full flex items-center justify-center mx-auto">
+                  <Link to={`/view/${val.id}?id=${val.id} `} state={{id:val.id}}>
+                                      <button type='submit' className='bg-gray-700 text-white rounded w-fit px-4 py-2 m-1 cursor-pointer' >
+                                        View
+                                        </button>
+                                        </Link>
                   <button
                     type="submit"
                     className="cursor-pointer bg-gray-600 m-1 w-fit h-10 rounded text-white px-4 py-2"

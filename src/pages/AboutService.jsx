@@ -5,6 +5,7 @@ import Meat from '../assets/meat.jpg'
 import EditDeleteButton from '../components/ui/EditDeleteButton';
 import Editabout from '../components/pagecomponents/EditaboutSection/Editabout';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 function AboutService() {
   const [click,setclick]=useState(false)
@@ -69,6 +70,11 @@ function AboutService() {
                 <td className="border capitalize border-gray-800  w-4/12 px-2">{val.description}</td>
                
                <td className=" w-full h-full flex items-center justify-center px-2">
+                <Link to={`/view/${val.id}?id=${val.id} `} state={{id:val.id}}>
+                                      <button type='submit' className='bg-gray-700 text-white rounded w-fit px-4 py-2 m-1 cursor-pointer' >
+                                        View
+                                        </button>
+                                        </Link>
                 <button type='submit' className='cursor-pointer bg-gray-600 m-1 w-fit h-10 rounded text-white px-4 py-2' onClick={()=>{
                   setclick(true)
                 }}>Edit</button>

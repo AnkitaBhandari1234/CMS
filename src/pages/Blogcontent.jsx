@@ -7,6 +7,8 @@ import React, { useEffect, useState } from 'react'
 import EditDeleteButton from '../components/ui/EditDeleteButton'
 import EditBlogContent from '../components/pagecomponents/editBlogsection/EditBlogContent'
 import axios from 'axios'
+import { Link } from 'react-router-dom';
+
 
 
 function Blogcontent() {
@@ -17,7 +19,7 @@ function Blogcontent() {
   const getdatas = () => {
     try {
       axios
-        .get("http://localhost:3000/blogcontent")
+        .get(`http://localhost:3000/blogcontent`)
         .then((result) => {
           console.log(result.data);
           setdatas([...result.data]);
@@ -73,6 +75,11 @@ function Blogcontent() {
                 <td className="border capitalize border-gray-800  w-4/12 px-2 text-sm">{val.description}</td>
                
                  <td className=" w-full h-full flex items-center justify-center ">
+                  <Link to={`/view/${val.id}?id=${val.id} `} state={{id:val.id}}>
+                                      <button type='submit' className='bg-gray-700 text-white rounded w-fit px-4 py-2 m-1 cursor-pointer' >
+                                        View
+                                        </button>
+                                        </Link>
                 <button type='submit' className='cursor-pointer bg-gray-600 m-1 w-fit h-10 rounded text-white px-4 py-2' onClick={()=>{
                   setclick(true)
                 }}>Edit</button>
