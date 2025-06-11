@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 
 function Blogcard() {
   const [click,setclick]=useState(false);
-
+ const [editdata,seteditdata]=useState([]);
        const [datas, setdatas] = useState([]);
   const getdatas = () => {
     try {
@@ -78,10 +78,11 @@ function Blogcard() {
                                         </Link>
                        <button type="submit" className="cursor-pointer bg-gray-600 m-1 w-fit h-10 rounded text-white px-4 py-2   " onClick={()=>{
                     setclick(true)
+                    seteditdata([val])
                   }} >Edit</button>
                   {
                     click?<div className='fixed top-0 left-0 right-0 bottom-0 bg-[#9f9f9c]/20 flex items-center'>
-                      <EditBlogcard cancel={()=>{setclick(false)}}/>
+                      <EditBlogcard editdata={editdata} cancel={()=>{setclick(false)}}/>
                     </div>:null
                   }
             

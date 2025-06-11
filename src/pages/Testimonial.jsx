@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 
 function Testimonial() {
   const [clicked, setClicked] = useState(false);
+  const [editdata,seteditdata]=useState([]);
 
   const [datas, setdatas] = useState([]);
   const getdatas = () => {
@@ -48,6 +49,8 @@ function Testimonial() {
       console.log(error);
     }
   };
+
+  
 
   return (
     <div className="h-lvh">
@@ -91,6 +94,7 @@ function Testimonial() {
                     className="cursor-pointer bg-gray-600 m-1 w-fit h-10 rounded text-white px-4 py-2   "
                     onClick={() => {
                       setClicked(true);
+                      seteditdata([val]);
                     }}
                   >
                     Edit
@@ -98,6 +102,8 @@ function Testimonial() {
                   {clicked ? (
                     <div className="fixed top-0 left-0 right-0 bottom-0 bg-[#9f9f9c]/20 flex items-center">
                       <EditReviewSection
+                     
+                      editdata={editdata}
                         cancel={() => {
                           setClicked(false);
                         }}

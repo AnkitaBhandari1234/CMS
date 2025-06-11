@@ -13,6 +13,9 @@ import { Link } from 'react-router-dom';
 
 function Blogcontent() {
   const [click,setclick]=useState(false);
+  const [editdata,seteditdata]=useState([]);
+
+
  
     const[deleteclick,setdeleteclick]=useState(null);
               const [datas, setdatas] = useState([]);
@@ -82,10 +85,11 @@ function Blogcontent() {
                                         </Link>
                 <button type='submit' className='cursor-pointer bg-gray-600 m-1 w-fit h-10 rounded text-white px-4 py-2' onClick={()=>{
                   setclick(true)
+                  seteditdata([val])
                 }}>Edit</button>
                   {
                     click?<div className='fixed top-0 left-0 right-0 bottom-0 bg-[#9f9f9c]/30 flex items-center'>
-                      <EditBlogContent cancel={()=>{
+                      <EditBlogContent editdata={editdata} cancel={()=>{
                         setclick(false)
                       }}/>
                     </div>:null

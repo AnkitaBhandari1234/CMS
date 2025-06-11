@@ -7,6 +7,7 @@ import axios from "axios";
 function Aboutsection() {
   const [submit, setsubmit] = useState(false);
   const [datas, setdatas] = useState([]);
+  
   const inputField = [
     { title: "image", type: "file" },
     { title: "title", type: "text" },

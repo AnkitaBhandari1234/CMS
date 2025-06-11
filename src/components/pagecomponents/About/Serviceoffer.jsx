@@ -6,6 +6,7 @@ import toast, { Toaster } from 'react-hot-toast';
 
 function Serviceoffer() {
   const [submit,setsubmit]=useState(false)
+  
      const inputField=[
             {title:'title',
                 type:'text',

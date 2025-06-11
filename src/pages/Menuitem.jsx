@@ -6,6 +6,7 @@ import axios from 'axios';
 function Menuitem() {
   const [click,setclick]=useState(false)
     const [datas, setdatas] = useState([]);
+    const[editdata,seteditdata]=useState([]);
   const getdatas = () => {
     try {
       axios
@@ -45,7 +46,8 @@ function Menuitem() {
       console.log(error);
     }
   };
- 
+
+
   
   return (
    <div className=''>
@@ -70,11 +72,19 @@ function Menuitem() {
                   <td className=" w-full h-full flex items-center justify-center">
                 <button type='submit' className='cursor-pointer bg-gray-600 m-1 w-fit h-10 rounded text-white px-4 py-2' onClick={()=>{
                   setclick(true)
-                }}>Edit</button>
+                  seteditdata([val])
+                   
+                }}>Edit
+
+                {/* for editing the text/content */}
+                
+                </button>
                   {
                     click?<div className='fixed top-0 left-0 right-0 bottom-0 bg-[#9f9f9c]/30 flex items-center'>
-                      <EditMenuSection cancel={()=>{
+                      <EditMenuSection editdata={editdata} cancel={()=>{
                         setclick(false)
+                        
+                       
                       }}/>
                     </div>:null
                   }
@@ -92,7 +102,11 @@ function Menuitem() {
           })}
         </tbody>
       </table>
+
+      
+      
     </div>
+    
   )
 }
 

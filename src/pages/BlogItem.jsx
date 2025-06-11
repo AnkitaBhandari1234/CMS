@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 
 function BlogItem() {
   const [datas, setdatas] = useState([]);
+  const [editdata,seteditdata]=useState([]);
   const getdatas = () => {
     try {
       axios
@@ -99,6 +100,7 @@ function BlogItem() {
                     className="cursor-pointer bg-gray-600 m-1 w-fit h-10 rounded text-white px-4 py-2"
                     onClick={() => {
                       setclick(true);
+                      seteditdata([val]);
                     }}
                   >
                     Edit
@@ -106,6 +108,7 @@ function BlogItem() {
                   {click ? (
                     <div className="fixed top-0 left-0 right-0 bottom-0 bg-[#9f9f9c]/30 flex items-center">
                       <EditBlogItem
+                      editdata={editdata}
                         cancel={() => {
                           setclick(false);
                         }}
