@@ -1,6 +1,8 @@
 import React from 'react'
 import { Form,Field ,Formik} from 'formik';
 import Image from '../../../assets/upload.svg'
+import axios from 'axios';
+import toast, { Toaster } from 'react-hot-toast';
 
 function EditBlogcard({cancel,editdata}) {
     const inputField=[
@@ -16,6 +18,7 @@ function EditBlogcard({cancel,editdata}) {
             ]
   return (
         <div className=" bg-gray-800 w-4/12 h-fit flex items-center justify-center mx-auto   ">
+          <Toaster/>
                 
        
              <div className=" ">
@@ -27,11 +30,27 @@ function EditBlogcard({cancel,editdata}) {
                      
                      description: editdata.length>0 && editdata[0].description?editdata[0].description:'',
                    }}
+                   onSubmit={(values)=>{
+                          try {
+                axios
+                  .patch(`http://localhost:3000/blogcard/${editdata.length>0 && editdata[0].id}`,values)
+                  .then((result) => {
+                    console.log(result.data);
+                   toast.success("Form submitted successfully!");
+                  })
+                  .catch((err) => {
+                    console.log(err);
+                  });
+              } catch (error) {
+                console.log(error);
+              }
+
+                   }}
                   
                  >
-                   {({}) => {
+                   {({handleSubmit}) => {
                      return (
-                       <Form className="flex flex-col   text-left h-[480px] gap-5   w-full justify-center mx-auto  ">
+                       <Form onSubmit={handleSubmit} className="flex flex-col   text-left h-[480px] gap-5   w-full justify-center mx-auto  ">
                          {inputField.map((val, i) => {
                            return (
                              <div key={i} className="w-full    ">
@@ -55,7 +74,7 @@ function EditBlogcard({cancel,editdata}) {
                                           >
                                             Submit
                                           </button>
-                                          <button
+                                          <div
                                           onClick={cancel}
                                             type="submit"
                                             className=" w-4/12  p-1  bg-red-700 text-white uppercase text-lg font-medium rounded cursor-pointer "
@@ -64,7 +83,7 @@ function EditBlogcard({cancel,editdata}) {
                                            
                                           >
                                             cancel
-                                          </button>
+                                          </div>
                                         </div>
                        </Form>
                      );

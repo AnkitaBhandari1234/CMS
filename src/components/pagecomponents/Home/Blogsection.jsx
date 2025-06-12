@@ -16,11 +16,11 @@ function Blogsection() {
     },
 
     {
-      title: "date",
-      type: "date",
+      title: "subtitle",
+      type: "text",
     },
     {
-      title: "name",
+      title: "title",
       type: "text",
     },
     {
@@ -53,25 +53,27 @@ function Blogsection() {
             initialValues={{
               
               image: "",
-              date: "",
-              name:"",
+              subtitle: "",
+             title:"",
               description: "",
               like: "",
               comments: "",
             }}
-            onSubmit={() => {
-              setsubmit(true);
-              toast.success("Form submitted successfully!");
+            onSubmit={(values) => {
+             
+              
                 try {
       axios
-        .get("http://localhost:3000/banners")
+        .post("http://localhost:3000/banners",values)
         .then((result) => {
           console.log(result.data);
-          setdatas([...result.data]);
+          toast.success("Form submitted successfully!");
+          
         })
         .catch((err) => {
           console.log(err);
         });
+        
     } catch (error) {
       console.log(error);
     }

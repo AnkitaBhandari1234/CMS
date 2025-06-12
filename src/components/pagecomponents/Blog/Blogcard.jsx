@@ -36,15 +36,14 @@ function Blogcard() {
               name: "",
               description: "",
             }}
-            onSubmit={() => {
-              setsubmit(true);
-              toast.success("Form submitted successfully!");
+            onSubmit={(values) => {
+            
               try {
                 axios
-                  .get("http://localhost:3000/blogcard")
+                  .post("http://localhost:3000/blogcard",values)
                   .then((result) => {
                     console.log(result.data);
-                    setdatas([...result.data]);
+                    toast.success("Form submitted successfully!");
                   })
                   .catch((err) => {
                     console.log(err);

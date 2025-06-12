@@ -30,15 +30,15 @@ function Aboutsection() {
               title: "",
               description: "",
             }}
-            onSubmit={() => {
-              setsubmit(true);
-              toast.success("Form submitted successfully!");
+            onSubmit={(values) => {
+              
+              
               try {
                 axios
-                  .get("http://localhost:3000/aboutus")
+                  .post("http://localhost:3000/aboutus",values)
                   .then((result) => {
                     console.log(result.data);
-                    setdatas([...result.data]);
+                    toast.success("Form submitted successfully!");
                   })
                   .catch((err) => {
                     console.log(err);

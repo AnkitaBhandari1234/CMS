@@ -10,18 +10,7 @@ function Menulist() {
   const [datas, setdatas] = useState([]);
   // for input fileds used for mapping
   const inputField = [
-    {
-      title: "title",
-      type: "text",
-    },
-    {
-      title: "subtitle",
-      type: "text",
-    },
-    {
-      title: "category",
-      type: "text",
-    },
+   
     {
       title: "name",
       type: "text",
@@ -51,23 +40,22 @@ function Menulist() {
           <Formik
             initialValues={{
               
-              title: "",
-              subtitle: "",
-              categort:"",
+            
               
               name:"",
               description: "",
              price:"",
             }}
-            onSubmit={() => {
-              setsubmit(true);
-              toast.success("Form submitted successfully!");
+            onSubmit={(values) => {
+              
+              
                 try {
       axios
-        .get("http://localhost:3000/category")
+        .post("http://localhost:3000/category",values)
         .then((result) => {
           console.log(result.data);
-          setdatas([...result.data]);
+          toast.success("Form submitted successfully!");
+          
         })
         .catch((err) => {
           console.log(err);
@@ -80,7 +68,7 @@ function Menulist() {
           >
             {({  }) => {
               return (
-                <Form className="flex flex-col gap-4  items-center h-[650px]   w-full  ">
+                <Form className="flex flex-col gap-4  items-center h-[300px]   w-full  ">
                   {inputField.map((val, i) => {
                    return(
 
