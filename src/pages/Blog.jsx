@@ -12,7 +12,7 @@ import Blognewsletter from '../components/pagecomponents/Blog/Blognewsletter'
 function Blog() {
   return (
     <div>
-      <Blogbanner />
+      <Blogbanner text='Blog' />
       <Blogcard/>
       <BlogLeftcontent />
      <Blogcontent />

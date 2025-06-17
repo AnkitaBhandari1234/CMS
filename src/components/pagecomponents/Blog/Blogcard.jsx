@@ -1,27 +1,25 @@
-import React, { useState } from 'react'
-import { Formik,Form,Field } from 'formik';
+import React, { useRef, useState } from "react";
+import { Formik, Form, Field } from "formik";
 
-import toast, { Toaster } from 'react-hot-toast';
-import axios from 'axios';
+import toast, { Toaster } from "react-hot-toast";
+import axios from "axios";
+import Image from "../../../assets/upload.svg";
+import JoditEditor from "jodit-react";
 
 function Blogcard() {
-  const [submit,setsubmit]=useState(false);
- 
-    const [datas, setdatas] = useState([]);
-    const inputField=[
-             {title:'image',
-                 type:'file',
-             },
-                {title:'name',
-                    type:'text',
-                },
-                {title:'description',
-                    type:'text',
-                },
-            ]
-            
+  const [submit, setsubmit] = useState(false);
+
+  const [datas, setdatas] = useState([]);
+  const inputField = [
+    { title: "image", type: "file" },
+    { title: "name", type: "text" },
+    { title: "description", type: "jodit" },
+  ];
+  const editor = useRef(null);
+  const [content, setContent] = useState("");
+
   return (
-    <div className="lg:grid lg:grid-cols-10  flex flex-col gap-5 mx-3 px-3  ">
+    <div className="lg:grid lg:grid-cols-10  flex flex-col gap-5 mx-3 px-3 my-10  ">
       <Toaster />
       <div className="lg:col-span-3 ">
         <h1 className=" text-2xl  font-medium  ">Blog Card</h1>
@@ -37,10 +35,9 @@ function Blogcard() {
               description: "",
             }}
             onSubmit={(values) => {
-            
               try {
                 axios
-                  .post("http://localhost:3000/blogcard",values)
+                  .post("http://localhost:3000/blogcard", values)
                   .then((result) => {
                     console.log(result.data);
                     toast.success("Form submitted successfully!");
@@ -53,24 +50,80 @@ function Blogcard() {
               }
             }}
           >
-            {({}) => {
+            {({ setFieldValue, values }) => {
               return (
-                <Form className="flex flex-col   items-center h-[380px] gap-5   w-full  ">
+                <Form className="flex flex-col   items-center h-fit gap-5   w-full  ">
                   {inputField.map((val, i) => {
-                    return (
-                      <div key={i} className="w-full    ">
-                        <div className="capitalize text-xl">
-                          <label>{val.title}</label>
+                    if (val.type == "file") {
+                      return (
+                        <div key={i} className="w-full  ">
+                          <label
+                            htmlFor="imagecard"
+                            className="text-xl capitalize "
+                          >
+                            {val.title}:
+                            {values && values.image ? (
+                              <div>
+                                <img
+                                  src={URL.createObjectURL(values.image)}
+                                  className="mt-2"
+                                />
+                              </div>
+                            ) : (
+                              <div className="w-full  border border-dashed  h-70 mt-2">
+                                <img
+                                  src={Image}
+                                  className="h-full w-20 m-auto "
+                                />
+                              </div>
+                            )}
+                          </label>
+                          <input
+                            type={val.type}
+                            id="imagecard"
+                            placeholder={val.title}
+                            onChange={(e) => {
+                              setFieldValue("image", e.target.files[0]);
+                            }}
+                            className="hidden"
+                          />
                         </div>
-                        <Field
-                          type={val.type}
-                          id={val.title}
-                          placeholder={val.title}
-                          name={val.title}
-                          className=" capitalize  p-1.5 border-1 border-black  w-full  rounded placeholder:text-gray-500 outline-none my-2 placeholder:px-1.5 "
-                        />
-                      </div>
-                    );
+                      );
+                    } else if (val.type == "jodit") {
+                      return (
+                        <div key={i} className="w-full">
+                          <label
+                            htmlFor="carddescription"
+                            className="text-xl capitalize"
+                          >
+                            {val.title}:
+                          </label>
+                          <JoditEditor
+                            ref={editor}
+                            value={values.description}
+                            tabIndex={1} // tabIndex of textarea
+                            onBlur={(newContent) => setContent(newContent)} // preferred to use only this option to update the content for performance reasons
+                            onChange={(newContent) => {}}
+                            className="mt-2"
+                          />
+                        </div>
+                      );
+                    } else {
+                      return (
+                        <div key={i} className="w-full    ">
+                          <div className="capitalize text-xl">
+                            <label>{val.title}:</label>
+                          </div>
+                          <Field
+                            type={val.type}
+                            id={val.title}
+                            placeholder={val.title}
+                            name={val.title}
+                            className=" capitalize  p-1.5 border-1 border-black  w-full  rounded placeholder:text-gray-500 outline-none my-2 placeholder:px-1.5 "
+                          />
+                        </div>
+                      );
+                    }
                   })}
                   <div className="w-full ">
                     <button
@@ -87,7 +140,7 @@ function Blogcard() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Blogcard
+export default Blogcard;

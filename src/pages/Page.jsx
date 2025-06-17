@@ -6,7 +6,7 @@ import Leftaligned from '../components/pagecomponents/Text/Leftaligned'
 function Page() {
   return (
     <div>
-      <Bannerreuse/>
+      <Bannerreuse text='Page'/>
       <Sampletext/>
       <Leftaligned/>
       

@@ -6,7 +6,7 @@ import Reservationsection from '../components/pagecomponents/Home/Reservationsec
 function Menu() {
   return (
     <div>
-        <Bannerreuse   />
+        <Bannerreuse text='Menu'  />
         <Menulist/>
         <Reservationsection />
 

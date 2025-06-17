@@ -30,7 +30,7 @@ function Postcategory() {
                          <h1 className='text-2xl  font-medium text-black'>Post Categories</h1>
                          <h2 className='break-all'>[title]</h2>
                        </div>
-                       <div className="lg:col-span-7 ">
+                       <div className="lg:col-span-6 ">
                          <div className=" ">
                          <Formik
                          initialValues={{
@@ -84,7 +84,7 @@ function Postcategory() {
                                          id={val.title}
                                          placeholder={val.title}
                                          name={val.title}
-                                         className=" capitalize border-1 border-black  p-1.5 lg:w-10/12 w-full rounded placeholder:text-gray-600 outline-none my-2 placeholder:px-1.5  "/>
+                                         className=" capitalize border-1 border-black  p-1.5  w-full rounded placeholder:text-gray-600 outline-none my-2 placeholder:px-1.5  "/>
                                       
                                          <ErrorMessage
                                            name={val.title}

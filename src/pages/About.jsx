@@ -9,7 +9,7 @@ function About() {
  
   return (
     <div className="flex flex-col gap-10  ">
-    <Bannerreuse  />
+    <Bannerreuse text='About us'  />
     <Aboutsection />
     <Serviceoffer />
     <Review />

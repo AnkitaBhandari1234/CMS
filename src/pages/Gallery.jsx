@@ -5,7 +5,7 @@ import Foodgallerysection from '../components/pagecomponents/Home/Foodgallerysec
 function Gallery() {
   return (
     <div>
-        <Bannerreuse/>
+        <Bannerreuse text='Gallery'/>
         <Foodgallerysection/>
     </div>
   )

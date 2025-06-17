@@ -1,12 +1,14 @@
 import { Formik, ErrorMessage, Field, Form } from "formik";
 import * as Yup from "yup";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import Homepageimage from "../../../assets/upload.svg";
 import toast, { Toaster } from "react-hot-toast";
+import Image from "../../../assets/upload.svg";
+import JoditEditor from "jodit-react";
 
 function Herosection() {
-  const [submit,setsubmit]=useState(false);
-    // for input fileds used for mapping
+  const [submit, setsubmit] = useState(false);
+  // for input fileds used for mapping
   const inputField = [
     {
       title: "subtitle",
@@ -18,138 +20,127 @@ function Herosection() {
     },
     {
       title: "description",
-      type: "text",
+      type: "jodit",
     },
     {
       title: "image",
       type: "file",
     },
   ];
-  // for form validation using Yup
-  const Schema = Yup.object().shape({
-    subtitle: Yup.string()
-      .min(3, "Too Short")
-      .max(6, "Too Long")
-      .required("Required"),
-     
-    title: Yup.string()
-      .min(2, "Too short")
-      .max(5, "Too long")
-      
-      .required("Required"),
-    description: Yup.string()
-      .min(10, "Too short")
-      .max(20, "Too long")
-      .lowercase("Lowercase")
-      .required("Required"),
-    
-  });
+ 
+    const editor = useRef(null);
+    const [content, setContent] = useState('');
 
   return (
-  <div >
-            <Toaster/>
-
-    {/* Home page */}
-    <div className="lg:grid lg:grid-cols-10  mx-3 flex flex-col gap-4 px-3    ">
+    <div className="lg:grid lg:grid-cols-10  flex flex-col gap-5 mx-3 px-3  ">
+      <Toaster />
       <div className="lg:col-span-3 ">
-        <h1 className=" text-2xl  font-medium  ">Home Page Form</h1>
-        <h2>[title,subtitle,description,image]</h2>
-
+        <h1 className=" text-2xl  font-medium  ">Hero Section</h1>
+        <h2 className="">[subtitle,title, description,image]</h2>
       </div>
-      
-    <div className="lg:col-span-7  ">
-      <div  className=" ">
-        <Formik
-          initialValues={{
-            subtitle: "",
-            title: "",
-            description: "",
-            image: "",
-          }}
-          onSubmit={() => {
-            setsubmit(true)
-            toast.success("Form submitted successfully!")
-            
-           
-           
-          }}
-          validationSchema={Schema}
-        >
-         
-          
-          {({ setFieldValue, values }) => {
-            return (
-              <Form className="flex flex-col lg:gap-4 gap-3 items-center h-[550px]  w-full  ">
-                {inputField.map((val, i) => {
-                  if (val.type == "file") {
-                    return (
-                      <div key={i} className="w-full  capitalize text-xl ">
-                        <label>{val.title}</label>
-                        <input
-                          type={val.type}
-                          id={val.title}
-                          name={val.title}
-                          placeholder={val.title}
-                          onChange={(e) => {
-                            setFieldValue(val.title, e.target.files[0]);
-                          }}
-                          className="outline-none hidden "
-                        />
 
-                        <label htmlFor={val.title}  >
-                          {values.image ? (
-                            <img src={URL.createObjectURL(values.image)} className="h-29"></img>
-                          ) : (
-                            <img src={Homepageimage} className="my-3  border-dashed border-1  p-10 "></img>
-                          )}
-                        </label>
-                      </div>
-                    );
-                  } else {
-                    return (
-                      <div key={i} className="w-full ">
-                        <div  className="capitalize text-xl">
-                          <label>{val.title}</label>
+      <div className="lg:col-span-6 ">
+        <div className=" ">
+          <Formik
+            initialValues={{
+              subtitle: "",
+              title: "",
+              description: "",
+              image: "",
+            }}
+            onSubmit={(values) => {
+              console.log(values);
+            }}
+          >
+            {({ setFieldValue, values }) => {
+              return (
+                <Form className="flex flex-col   items-center h-fit gap-5   w-full  ">
+                  {inputField.map((val, i) => {
+                    if (val.type == "file") {
+                      return (
+                        <div key={i} className="bg-amber- w-full ">
+                          <label
+                            htmlFor="imagecontent"
+                            className="text-xl capitalize "
+                          >
+                            {val.title}:
+                            {values && values.image ? (
+                              <img
+                                src={URL.createObjectURL(values.image)}
+                                alt=""
+                                className="h-full w-full object-contain"
+                              />
+                            ) : (
+                              <div className="w-full border h-full mt-2 border-dashed">
+                                <img
+                                  src={Image}
+                                  alt=""
+                                  className="w-20 h-70 m-auto "
+                                />
+                              </div>
+                            )}
+                          </label>
+                          <input
+                            type={val.type}
+                            id="imagecontent"
+                            className="hidden"
+                            onChange={(e) => {
+                              setFieldValue("image", e.target.files[0]);
+                            }}
+                          />
                         </div>
-                        <Field
-                          type={val.type}
-                          id={val.title}
-                          placeholder={val.title}
-                          name={val.title}
-                          className=" capitalize border-1 border-black p-1.5 lg:w-10/12 w-full rounded placeholder:text-gray-600 outline-none my-2 placeholder:px-1.5 "/>
-                       
-                          <ErrorMessage
+                      );
+                    } else if (val.type == "jodit") {
+                      return (
+                        <div key={i} className="w-full">
+                          <label
+                            htmlFor="carddescription"
+                            className="text-xl capitalize"
+                          >
+                            {val.title}:
+                          </label>
+                          <JoditEditor
+                            ref={editor}
+                            value={values.description}
+                            tabIndex={1} // tabIndex of textarea
+                            onBlur={(newContent) => setContent(newContent)} // preferred to use only this option to update the content for performance reasons
+                            onChange={(newContent) => {}}
+                            className="mt-2"
+                          />
+                        </div>
+                      );
+                    } else {
+                      return (
+                        <div key={i} className="w-full    ">
+                          <div className="capitalize text-xl">
+                            <label>{val.title}</label>
+                          </div>
+                          <Field
+                            type={val.type}
+                            id={val.title}
+                            placeholder={val.title}
                             name={val.title}
-                            component="div"
-                              className="text-red-600 text-lg pl-1.5"
-                          ></ErrorMessage>
-                        
-                      </div>
-                    );
-                  }
-                })}
-                <div className="w-full  ">
-                    <button type="submit"className=" lg:w-3/12 w-5/12 mx-auto p-2  bg-gray-300 uppercase text-lg font-medium rounded cursor-pointer hover:text-white hover:bg-gray-600 transition mx-auto">Submit</button>
-                    </div>
-                   
-              </Form>
-            );
-          }}
-        
-        </Formik>
+                            className=" capitalize  p-1.5 border-1 border-black  w-full  rounded placeholder:text-gray-500 outline-none my-2 placeholder:px-1.5 "
+                          />
+                        </div>
+                      );
+                    }
+                  })}
+                  <div className="w-full ">
+                    <button
+                      type="submit"
+                      className=" w-4/12  p-2  bg-gray-300 uppercase text-lg font-medium rounded cursor-pointer hover:text-white hover:bg-gray-600 transition"
+                    >
+                      Submit
+                    </button>
+                  </div>
+                </Form>
+              );
+            }}
+          </Formik>
+        </div>
       </div>
     </div>
-      </div>
-     
-
-      
-
-
- </div>
-
-
-
-
   );
 }
 

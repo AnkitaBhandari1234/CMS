@@ -1,15 +1,18 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { Formik,Form,ErrorMessage,Field } from 'formik';
 import * as Yup from 'yup';
 import Image from '../../../assets/upload.svg'
 import toast, { Toaster } from 'react-hot-toast';
+import JoditEditor from 'jodit-react';
 
 
 function Blognewsletter() {
   const [submit,setsubmit]=useState(false);
+  const editor = useRef(null);
+    const [content, setContent] = useState("");
         const inputField=[
             {title:'description',
-                type:'text',
+                type:'jodit',
             },
              
                 {title:'subtitle',
@@ -39,7 +42,7 @@ function Blognewsletter() {
                         <h1 className='text-2xl  font-medium text-black'>Newsletter</h1>
                         <h2>[description,sub-title]</h2>
                       </div>
-                      <div className="lg:col-span-7 ">
+                      <div className="lg:col-span-6 ">
                         <div className=" ">
                         <Formik
                         initialValues={{
@@ -58,29 +61,24 @@ function Blognewsletter() {
                           return (
                             <Form className="flex flex-col gap-4 items-center h-[300px]   w-full  ">
                               {inputField.map((val, i) => {
-                                if (val.type == "file") {
+                                if (val.type == "jodit") {
                                   return (
-                                    <div key={i} className="w-full  capitalize text-xl ">
-                                      <label>{val.title}</label>
-                                      <input
-                                        type={val.type}
-                                        id={val.title}
-                                        name={val.title}
-                                        placeholder={val.title}
-                                        onChange={(e) => {
-                                          setFieldValue(val.title, e.target.files[0]);
-                                        }}
-                                        className="outline-none hidden "
-                                      />
-              
-                                      <label htmlFor={val.title}  >
-                                        {values.image ? (
-                                          <img src={URL.createObjectURL(values.image)} className="h-29"></img>
-                                        ) : (
-                                          <img src={Image} className="my-3  border-dashed border-1  p-10 "></img>
-                                        )}
-                                      </label>
-                                    </div>
+                                     <div key={i} className="w-full">
+                          <label
+                            htmlFor="carddescription"
+                            className="text-xl capitalize"
+                          >
+                            {val.title}:
+                          </label>
+                          <JoditEditor
+                            ref={editor}
+                            value={values.description}
+                            tabIndex={1} // tabIndex of textarea
+                            onBlur={(newContent) => setContent(newContent)} // preferred to use only this option to update the content for performance reasons
+                            onChange={(newContent) => {}}
+                            className="mt-2"
+                          />
+                        </div>
                                   );
                                 } else {
                                   return (
@@ -93,7 +91,7 @@ function Blognewsletter() {
                                         id={val.title}
                                         placeholder={val.title}
                                         name={val.title}
-                                        className=" capitalize border-1 border-black  p-1.5 lg:w-10/12 w-full rounded placeholder:text-gray-600 outline-none my-2 placeholder:px-1.5  "/>
+                                        className=" capitalize border-1 border-black  p-1.5 w-full rounded placeholder:text-gray-600 outline-none my-2 placeholder:px-1.5  "/>
                                      
                                         <ErrorMessage
                                           name={val.title}
