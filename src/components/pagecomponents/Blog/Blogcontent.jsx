@@ -16,6 +16,29 @@ function Blogcontent() {
     { title: "title", type: "text" },
     { title: "description", type: "jodit" },
   ];
+  const fileUpload=(data,setFieldValue)=>{
+    console.log(data);
+    try{
+      const formdata=new FormData()
+      formdata.append('files',data);
+   axios
+                  .post("http://localhost:3000/fileupload", formdata)
+                  .then((result) => {
+                    console.log(result.data);
+                    setFieldValue('imageid',result.data.id)
+                    setFieldValue('image',result.data.file)
+
+                    toast.success("Form submitted successfully!");
+                  })
+                  .catch((err) => {
+                    console.log(err);
+                  });
+              } catch (error) {
+                console.log(error);
+
+    }
+
+  }
 
   return (
     <div className="lg:grid lg:grid-cols-10  flex flex-col gap-5 mx-3 px-3  ">
@@ -30,6 +53,7 @@ function Blogcontent() {
           <Formik
             initialValues={{
               image: "",
+              imageid:"",
               title: "",
               description: "",
             }}
@@ -65,7 +89,7 @@ function Blogcontent() {
                             {values && values.image ? (
                               <img
                                 className="h-full w-full object-contain border"
-                                src={URL.createObjectURL(values.image)}
+                                src={values.image}
                               />
                             ) : (
                               <div className="border border-dashed   h-full w-full rounded text-sm mt-2">
@@ -84,7 +108,8 @@ function Blogcontent() {
                             onChange={(e) => {
                               // console.log("object");
                               // console.log(e.target);
-                              setFieldValue("image", e.target.files[0]);
+                              fileUpload(e.target.files[0],setFieldValue)
+                              // setFieldValue("image", e.target.files[0]);
                             }}
                             className="hidden"
                           />

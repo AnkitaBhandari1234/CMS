@@ -18,6 +18,27 @@ function Blogcard() {
   const editor = useRef(null);
   const [content, setContent] = useState("");
 
+  const fileUpload=(data,setFieldValue)=>{
+    console.log(data);
+     try {
+      const fromdata=new FormData()
+      fromdata.append('files',data)
+                axios
+                  .post("http://localhost:3000/fileupload", fromdata)
+                  .then((result) => {
+                    console.log(result.data);
+                    setFieldValue('imageid',result.data.id)
+                    setFieldValue('image',result.data.file)
+
+                    toast.success("Form submitted successfully!");
+                  })
+                  .catch((err) => {
+                    console.log(err);
+                  });
+              } catch (error) {
+                console.log(error);
+              }
+            }
   return (
     <div className="lg:grid lg:grid-cols-10  flex flex-col gap-5 mx-3 px-3 my-10  ">
       <Toaster />
@@ -31,6 +52,7 @@ function Blogcard() {
           <Formik
             initialValues={{
               image: "",
+              imageid:"",
               name: "",
               description: "",
             }}
@@ -65,7 +87,7 @@ function Blogcard() {
                             {values && values.image ? (
                               <div>
                                 <img
-                                  src={URL.createObjectURL(values.image)}
+                                  src={values.image}
                                   className="mt-2"
                                 />
                               </div>
@@ -83,7 +105,8 @@ function Blogcard() {
                             id="imagecard"
                             placeholder={val.title}
                             onChange={(e) => {
-                              setFieldValue("image", e.target.files[0]);
+                              fileUpload(e.target.files[0],setFieldValue)
+                              // setFieldValue("image", e.target.files[0]);
                             }}
                             className="hidden"
                           />

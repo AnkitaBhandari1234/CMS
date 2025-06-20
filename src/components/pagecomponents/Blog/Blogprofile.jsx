@@ -4,6 +4,7 @@ import * as Yup from "yup";
 import Image from "../../../assets/upload.svg";
 import toast, { Toaster } from "react-hot-toast";
 import JoditEditor from "jodit-react";
+import axios from "axios";
 
 function Blogprofile() {
   const [submit, setsubmit] = useState(false);
@@ -36,6 +37,30 @@ function Blogprofile() {
       .lowercase("Lowercase")
       .required("Required"),
   });
+ const fileUpload=(data,setFieldValue)=>{
+    console.log(data);
+     try {
+      const fromdata=new FormData()
+      fromdata.append('files',data)
+                axios
+                  .post("http://localhost:3000/fileupload", fromdata)
+                  .then((result) => {
+                    console.log(result.data);
+                    setFieldValue('imageid',result.data.id)
+                    setFieldValue('image',result.data.file)
+
+                    toast.success("Form submitted successfully!");
+                  })
+                  .catch((err) => {
+                    console.log(err);
+                  });
+              } catch (error) {
+                console.log(error);
+              }
+
+
+  }
+
   return (
     <div className="lg:grid lg:grid-cols-10 lg:gap-7 flex flex-col gap-4  mx-3 px-3 my-9   ">
       <Toaster />
@@ -50,6 +75,7 @@ function Blogprofile() {
           <Formik
             initialValues={{
               image: "",
+              imageid:"",
               name: "",
               subtitle: "",
               facebook: "",
@@ -71,14 +97,14 @@ function Blogprofile() {
                       return (
                         <div key={i} className="w-full  ">
                           <label
-                            htmlFor="imagecard"
+                            htmlFor="imageprofile"
                             className="text-xl capitalize "
                           >
                             {val.title}:
                             {values && values.image ? (
                               <div>
                                 <img
-                                  src={URL.createObjectURL(values.image)}
+                                  src={values.image}
                                   className="mt-2"
                                 />
                               </div>
@@ -93,10 +119,11 @@ function Blogprofile() {
                           </label>
                           <input
                             type={val.type}
-                            id="imagecard"
+                            id="imageprofile"
                             placeholder={val.title}
                             onChange={(e) => {
-                              setFieldValue("image", e.target.files[0]);
+                              fileUpload(e.target.files[0],setFieldValue);
+                              // setFieldValue("image", e.target.files[0]);
                             }}
                             className="hidden"
                           />

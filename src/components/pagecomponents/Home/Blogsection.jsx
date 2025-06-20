@@ -39,6 +39,29 @@ function Blogsection() {
       type: "number",
     },
   ];
+  const fileUpload=(data,setFieldValue)=>{
+    console.log(data);
+    try{
+      const formdata=new FormData()
+      formdata.append('files',data);
+   axios
+                  .post("http://localhost:3000/fileupload", formdata)
+                  .then((result) => {
+                    console.log(result.data);
+                    setFieldValue('imageid',result.data.id)
+                    setFieldValue('image',result.data.file)
+
+                    toast.success("Form submitted successfully!");
+                  })
+                  .catch((err) => {
+                    console.log(err);
+                  });
+              } catch (error) {
+                console.log(error);
+
+    }
+
+  }
  
   return (
     <div className="lg:grid lg:grid-cols-10  flex flex-col gap-4 mx-3 px-3  ">
@@ -56,6 +79,7 @@ function Blogsection() {
             initialValues={{
               
               image: "",
+              imageid:"",
               subtitle: "",
              title:"",
               description: "",
@@ -94,7 +118,7 @@ function Blogsection() {
                                                   {val.title}:
                                                   {values && values.image ? (
                                                     <div>
-                                                      <img src={URL.createObjectURL(values.image)} className="mt-2" />
+                                                      <img src={values.image} className="mt-2" />
                                                     </div>
                                                   ) : (
                                                     <div className="w-10/12 border border-dashed  h-70 mt-2">
@@ -107,7 +131,8 @@ function Blogsection() {
                                                   id="imageblogsection"
                                                   placeholder={val.title}
                                                   onChange={(e) => {
-                                                    setFieldValue("image", e.target.files[0]);
+                                                    // setFieldValue("image", e.target.files[0]);
+                                                    fileUpload(e.target.files[0],setFieldValue);
                                                   }}
                                                   className="hidden"
                                                 />

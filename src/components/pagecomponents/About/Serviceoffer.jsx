@@ -4,6 +4,7 @@ import Image from '../../../assets/upload.svg'
 import * as Yup from "yup"
 import toast, { Toaster } from 'react-hot-toast';
 import JoditEditor from 'jodit-react';
+import axios from 'axios';
 
 
 function Serviceoffer() {
@@ -28,6 +29,30 @@ function Serviceoffer() {
                 type:'jodit',
             },
         ]
+
+        const fileUpload=(data,setFieldValue)=>{
+    console.log(data);
+    try{
+      const formdata=new FormData()
+      formdata.append('files',data);
+   axios
+                  .post("http://localhost:3000/fileupload", formdata)
+                  .then((result) => {
+                    console.log(result.data);
+                    setFieldValue('imageid',result.data.id)
+                    setFieldValue('image',result.data.file)
+
+                    toast.success("Form submitted successfully!");
+                  })
+                  .catch((err) => {
+                    console.log(err);
+                  });
+              } catch (error) {
+                console.log(error);
+
+    }
+
+  }
         // const Schema = Yup.object().shape({
         //    subtitle: Yup.string()
         //      .min(3, "Too Short")
@@ -64,6 +89,7 @@ function Serviceoffer() {
                                  title: "",
                                  subtitle:"",
                                  image: "",
+                                 imageid:"",
                                  foodname:"",
                                  description: "",
                                }}
@@ -84,7 +110,7 @@ function Serviceoffer() {
                             {val.title}:
                             {values && values.image ? (
                               <div>
-                                <img src={URL.createObjectURL(values.image)} className="mt-2" />
+                                <img src={values.image} className="mt-2" />
                               </div>
                             ) : (
                               <div className="w-full  border border-dashed  h-70 mt-2">
@@ -97,7 +123,8 @@ function Serviceoffer() {
                             id="imageserviceoffer"
                             placeholder={val.title}
                             onChange={(e) => {
-                              setFieldValue("image", e.target.files[0]);
+                              fileUpload(e.target.files[0],setFieldValue);
+                              // setFieldValue("image", e.target.files[0]);
                             }}
                             className="hidden"
                           />

@@ -3,6 +3,7 @@ import { Formik,Form,ErrorMessage,Field } from 'formik';
 import * as Yup from 'yup'
 import Image from '../../assets/upload.svg'
 import toast, { Toaster } from 'react-hot-toast';
+import axios from 'axios';
 
 function Bannerreuse({text}) {
   const [submit,setsubmit]=useState(false)
@@ -31,6 +32,29 @@ function Bannerreuse({text}) {
            .required("Required"),
        
        });
+       const fileUpload=(data,setFieldValue)=>{
+    console.log(data);
+    try{
+      const formdata=new FormData()
+      formdata.append('files',data);
+   axios
+                  .post("http://localhost:3000/fileupload", formdata)
+                  .then((result) => {
+                    console.log(result.data);
+                    setFieldValue('imageid',result.data.id)
+                    setFieldValue('image',result.data.file)
+
+                    toast.success("Form submitted successfully!");
+                  })
+                  .catch((err) => {
+                    console.log(err);
+                  });
+              } catch (error) {
+                console.log(error);
+
+    }
+
+  }
   return (
      <div>
       <Toaster/>
@@ -49,6 +73,7 @@ function Bannerreuse({text}) {
                               title: "",
                               description: "",
                               image: "",
+                              imageid:"",
                             }}
                             onSubmit={() => {
                               setsubmit(true);
@@ -63,11 +88,11 @@ function Bannerreuse({text}) {
                                     if (val.type == "file") {
                                       return (
                                         <div key={i} className="w-full  ">
-                                                                  <label htmlFor="imagecard" className="text-xl capitalize ">
+                                                                  <label htmlFor="imagebannerreuse" className="text-xl capitalize ">
                                                                     {val.title}:
                                                                     {values && values.image ? (
                                                                       <div>
-                                                                        <img src={URL.createObjectURL(values.image)} className="mt-2" />
+                                                                        <img src={values.image} className="mt-2" />
                                                                       </div>
                                                                     ) : (
                                                                       <div className="w-10/12  border border-dashed  h-70 mt-2">
@@ -77,10 +102,11 @@ function Bannerreuse({text}) {
                                                                   </label>
                                                                   <input
                                                                     type={val.type}
-                                                                    id="imagecard"
+                                                                    id="imagebannerreuse"
                                                                     placeholder={val.title}
                                                                     onChange={(e) => {
-                                                                      setFieldValue("image", e.target.files[0]);
+                                                                      // setFieldValue("image", e.target.files[0]);
+                                                                      fileUpload(e.target.files[0],setFieldValue);
                                                                     }}
                                                                     className="hidden"
                                                                   />
