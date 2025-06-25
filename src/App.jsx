@@ -22,6 +22,7 @@ import Blogcard from './pages/Blogcard';
 import Blogcontent from './pages/Blogcontent';
 import Button from './pages/Button';
 import View from './components/pagecomponents/View/View';
+import Formauth from './components/pagecomponents/Home/Formauth';
 
 
 function App() {
@@ -52,6 +53,7 @@ function App() {
           
           
           </Route>
+          <Route path='/log' element={<Formauth />} />
         </Routes>
       </div>
     </>

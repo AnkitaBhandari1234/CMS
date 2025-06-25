@@ -70,7 +70,7 @@ function Navigation() {
       icon:<MdContacts />,
     },
     {
-      path:'/login ',
+      path:'/log ',
       name:'log In',
       icon:<RiLoginBoxFill />,
     },

@@ -4,6 +4,7 @@ import Bannerreuse from "../components/ui/Bannerreuse";
 import Aboutsection from "../components/pagecomponents/Home/Aboutsection";
 import Serviceoffer from "../components/pagecomponents/About/Serviceoffer";
 import Review from "../components/pagecomponents/Home/Review";
+import Formauth from "../components/pagecomponents/Home/Formauth";
 
 function About() {
  
@@ -13,7 +14,7 @@ function About() {
     <Aboutsection />
     <Serviceoffer />
     <Review />
-
+   {/* <Formauth/> */}
 
 
     </div>

@@ -109,7 +109,7 @@ function Blogsection() {
           >
             {({setFieldValue,values  }) => {
               return (
-                <Form className="flex flex-col gap-4  items-center h-[600px]   w-full  ">
+                <Form className="flex flex-col gap-4  items-center h-fit   w-full  ">
                   {inputField.map((val, i) => {
                   if(val.type=='file'){
                     return(

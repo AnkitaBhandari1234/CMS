@@ -41,7 +41,7 @@ function Foodgallerysection() {
 
       .required("Required"),
   });
-  const fileUpload=(data,setFieldValue)=>{
+  const fileUpload=(data,setFieldValue,values)=>{
     console.log(data);
     try{
       const formdata=new FormData()
@@ -49,9 +49,11 @@ function Foodgallerysection() {
    axios
                   .post("http://localhost:3000/fileupload", formdata)
                   .then((result) => {
-                    console.log(result.data);
-                    setFieldValue('imageid',result.data.id)
-                    setFieldValue('image',result.data.file)
+                    console.log(result.data)
+                    console.log(values);
+                    ;
+                    setFieldValue('imageid',[...values.imageid,result.data.id])
+                    setFieldValue('image',[...values.image,result.data.file])
 
                     toast.success("Form submitted successfully!");
                   })
@@ -80,8 +82,8 @@ function Foodgallerysection() {
                 title: "",
                 subtitle: "",
                 category: "",
-                image: "",
-                imageid:"",
+                image: [],
+                imageid:[],
               }}
               onSubmit={(values) => {
                 setsubmit(true);
@@ -95,34 +97,43 @@ function Foodgallerysection() {
                     {inputField.map((val, i) => {
                       if (val.type == "file") {
                         return (
-                          <div key={i} className="w-full  ">
+                          <div key={i} className="w-full   ">
                             <label
                               htmlFor="imagefoodgallery"
                               className="text-xl capitalize "
                             >
                               {val.title}:
-                              {values && values.image ? (
-                                <div>
-                                  <img
-                                    src={values.image}
-                                    className="mt-2"
-                                  />
-                                </div>
-                              ) : (
-                                <div className="w-10/12  border border-dashed  h-70 mt-2">
+
+                              <div className="grid grid-cols-3 gap-10">
+                                <div className="w-10/12  border border-dashed  h-44 mt-2">
                                   <img
                                     src={Image}
-                                    className="h-full w-20  m-auto "
+                                    className="h-full w-16  m-auto "
                                   />
                                 </div>
+                                
+                              {values && values.image.length>0 ? (
+                                
+                                values.image.map((imgss)=>{
+                                  return <div className="w-full">
+                                  <img
+                                    src={imgss}
+                                    className="w-50 h-44 mt-4 object-cover "
+                                  />
+                                </div>
+                                })
+                              ) 
+                              : (
+                               <div></div> 
                               )}
+                              </div>
                             </label>
                             <input
                               type={val.type}
                               id="imagefoodgallery"
                               placeholder={val.title}
                               onChange={(e) => {
-                                fileUpload(e.target.files[0],setFieldValue)
+                                fileUpload(e.target.files[0],setFieldValue,values)
                                 // setFieldValue("image", e.target.files[0]);
                               }}
                               className="hidden"

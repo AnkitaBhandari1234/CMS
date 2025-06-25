@@ -6,6 +6,7 @@ import Reservationsection from '../components/pagecomponents/Home/Reservationsec
 import Foodgallerysection from '../components/pagecomponents/Home/Foodgallerysection'
 import Review from '../components/pagecomponents/Home/Review'
 import Blogsection from '../components/pagecomponents/Home/Blogsection'
+import Formauth from '../components/pagecomponents/Home/Formauth'
 
 
 function Home() {
@@ -18,6 +19,7 @@ function Home() {
       <Foodgallerysection />
       <Review />
       <Blogsection />
+      
       
     </div>
 
