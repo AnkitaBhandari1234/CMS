@@ -28,9 +28,7 @@ import Formauth from './components/pagecomponents/Home/Formauth';
 function App() {
  
   return (
-    <>
 
-      <div>
         <Routes>
           <Route element={<Layout/>}>
           <Route path='/' element={<Home></Home>}/>
@@ -55,8 +53,7 @@ function App() {
           </Route>
           <Route path='/log' element={<Formauth />} />
         </Routes>
-      </div>
-    </>
+
   )
 }
 

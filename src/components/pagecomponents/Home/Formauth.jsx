@@ -1,11 +1,13 @@
 import axios from 'axios';
 import { Field,Form, Formik } from 'formik'
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 
 
 
 function Formauth() {
   const [data,setdatas]=useState([]);
+  const navigate=useNavigate()
 
   return (
     <div className=' w-full h-screen flex items-center '>
@@ -25,6 +27,10 @@ function Formauth() {
             .then((result) => {
               console.log(result.data);
               setdatas([...result.data]);
+              localStorage.setItem('token',result.data)
+              if(result.data){
+                navigate('/')
+              }
             })
             .catch((err) => {
               console.log(err);
