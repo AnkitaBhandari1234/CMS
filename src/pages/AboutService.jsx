@@ -71,7 +71,7 @@ function AboutService() {
                 <td className="border capitalize border-gray-800  w-4/12 px-2">{val.description}</td>
                
                <td className=" w-full h-full flex items-center justify-center px-2">
-                <Link to={`/view/${val.id}?id=${val.id} `} state={{id:val.id}}>
+                <Link to={`/viewaboutservice/${val.id}?id=${val.id} `} state={{id:val.id}}>
                                       <button type='submit' className='bg-gray-700 text-white rounded w-fit px-4 py-2 m-1 cursor-pointer' >
                                         View
                                         </button>

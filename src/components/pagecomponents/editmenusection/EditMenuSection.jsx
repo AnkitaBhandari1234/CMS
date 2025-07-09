@@ -24,9 +24,7 @@ function EditMenuSection({ cancel, editdata }) {
       <div className=" ">
         <div className="text-white ">
           <Formik
-            
             initialValues={{
-              
               image: "",
               name:
                 editdata.length > 0 && editdata[0].name ? editdata[0].name : "",
@@ -37,7 +35,6 @@ function EditMenuSection({ cancel, editdata }) {
                   : "",
               price: editdata && editdata[0].price ? editdata[0].price : "",
             }}
-            
           >
             {({}) => {
               return (

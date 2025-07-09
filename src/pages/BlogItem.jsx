@@ -90,7 +90,7 @@ function BlogItem() {
                   {val.comments}
                 </td>
                 <td className=" w-[150px] h-full flex items-center justify-center mx-auto">
-                  <Link to={`/view/${val.id}?id=${val.id} `} state={{id:val.id}}>
+                  <Link to={`/viewblogitem/${val.id}?id=${val.id} `} state={{id:val.id}}>
                                       <button type='submit' className='bg-gray-700 text-white rounded w-fit px-4 py-2 m-1 cursor-pointer' >
                                         View
                                         </button>

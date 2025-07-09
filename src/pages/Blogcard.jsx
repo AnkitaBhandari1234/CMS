@@ -71,7 +71,7 @@ function Blogcard() {
                 <td className="border capitalize border-gray-800  w-3/12 px-2">{val.description}</td>
                
                 <td className=" w-full h-full  flex items-center justify-center">
-                   <Link to={`/view/${val.id}?id=${val.id} `} state={{id:val.id}}>
+                   <Link to={`/viewblog/${val.id}?id=${val.id} `} state={{id:val.id}}>
                                       <button type='submit' className='bg-gray-700 text-white rounded w-fit px-4 py-2 m-1 cursor-pointer' >
                                         View
                                         </button>

@@ -6,7 +6,7 @@ function EditDeleteButton({deleteChange,setdeleteclick,click}) {
   return (
     <div className='flex '>
 
-        {/* edit button */}
+        
         
 
                   {/* Delete Button */}

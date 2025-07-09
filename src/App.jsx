@@ -23,6 +23,12 @@ import Blogcontent from './pages/Blogcontent';
 import Button from './pages/Button';
 import View from './components/pagecomponents/View/View';
 import Formauth from './components/pagecomponents/Home/Formauth';
+import Viewblogcard from './components/pagecomponents/View/Viewblogcard';
+import Viewblogcontent from './components/pagecomponents/View/Viewblogcontent';
+import Viewaboutservice from './components/pagecomponents/View/Viewaboutservice';
+import Viewblogitem from './components/pagecomponents/View/Viewblogitem';
+import Viewtestimonial from './components/pagecomponents/View/Viewtestimonial';
+import Viewmenuitem from './components/pagecomponents/View/Viewmenuitem';
 
 
 function App() {
@@ -48,6 +54,12 @@ function App() {
           <Route path='/blogcontent' element={<Blogcontent/>}/>
           <Route path='/button' element={<Button/>}/>
           <Route path='/view/:id' element={<View/>}/>
+          <Route path='/viewblog/:id' element={<Viewblogcard/>}/>
+          <Route path='/viewblogcontent/:id' element={<Viewblogcontent/>}/>
+          <Route path='/viewaboutservice/:id' element={<Viewaboutservice/>}/>
+          <Route path='/viewblogitem/:id' element={<Viewblogitem/>}/>
+          <Route path='/viewtestimonial/:id' element={<Viewtestimonial/>}/>
+          <Route path='/viewmenuitem/:id' element={<Viewmenuitem/>}/>
           
           
           </Route>
